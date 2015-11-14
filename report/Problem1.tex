@@ -1,17 +1,17 @@
-By means of Eqs~\ref{eq:1.1},~\ref{eq:1.2},~\ref{eq:1.3},~\ref{eq:1.4} and~\ref{eq:1.5}, we can identify 3 state variables $i$, $x$ and $\dot{x}$. We can also identify the input $u_e$.
+By means of Eqs~\ref{eq:1.1},~\ref{eq:1.2},~\ref{eq:1.3},~\ref{eq:1.4} and~\ref{eq:1.5}, we can identify 3 state variables $x$,  $\dot{x}$ and $i$. We can also identify the input $u_e$.
 
 $\text{x}=\begin{pmatrix}
-   i\\
    x \\
-	 \dot{x}
+   \dot{x} \\
+	 i
 \end{pmatrix}$ and $\text{u}=(u_e)$
 
 Then, we can derive the nonlinear dynamical state space model to obtain
 
 \begin{align}
-   \dot{i} &= \frac{u_e-(R_e+(l_1+2l_2x)\dot{x})i-(Bl_0+b_1x+b_2x^2)\dot{x}}{L_{e0}+l_1x+l_2x^2}\\
    \dot{x} &= \dot{x}\\
-	 \ddot{x} &= \frac{(Bl_0+b_1x+b_2x^2)\i-R_m\dot{x}-(k_0+k_1x+k_2x^2)\text{x}(2)+\frac{1}{2}(l_1+2l_2x)\dot{x}i^2}{m_t}
+	 \ddot{x} &= \frac{(Bl_0+b_1x+b_2x^2)i-R_m\dot{x}-(k_0+k_1x+k_2x^2)x+\frac{1}{2}(l_1+2l_2x)\dot{x}i^2}{m_t}\\
+	 \dot{i} &= \frac{u_e-(R_e+(l_1+2l_2x)\dot{x})i-(Bl_0+b_1x+b_2x^2)\dot{x}}{L_{e0}+l_1x+l_2x^2}
 \end{align}
 
 In matrix format, we have
@@ -24,16 +24,16 @@ with
 \begin{equation}
 	\label{eq:f(x)}
 	f(\text{x})=\begin{pmatrix}
-   \frac{u_e-(R_e+(l_1+2l_2\text{x}(2))\text{x}(3))\text{x}(1)-(Bl_0+b_1\text{x}(2)+b_2\text{x}(2)^2)\text{x}(3)}{L_{e0}+l_1\text{x}(2)+l_2\text{x}(2)^2}\\
-   \text{x}(3) \\
-	 \frac{(Bl_0+b_1\text{x}(2)+b_2\text{x}(2)^2)\text{x}(1)-R_m\text{x}(3)-(k_0+k_1\text{x}(2)+k_2\text{x}(2)^2)\text{x}(2)+\frac{1}{2}(l_1+2l_2\text{x}(2))\text{x}(3)\text{x}(1)^2}{m_t}
+   \text{x}(2) \\
+	 \frac{(Bl_0+b_1\text{x}(1)+b_2\text{x}(1)^2)\text{x}(3)-R_m\text{x}(2)-(k_0+k_1\text{x}(1)+k_2\text{x}(1)^2)\text{x}(1)+\frac{1}{2}(l_1+2l_2\text{x}(1))\text{x}(2)\text{x}(3)^2}{m_t}\\
+	 \frac{u_e-(R_e+(l_1+2l_2\text{x}(1))\text{x}(2))\text{x}(3)-(Bl_0+b_1\text{x}(1)+b_2\text{x}(1)^2)\text{x}(2)}{L_{e0}+l_1\text{x}(1)+l_2\text{x}(1)^2}
 \end{pmatrix}
 \end{equation}
 \begin{equation}
 	\label{eq:g(u)}
 	g(\text{x})=\begin{pmatrix}
-   1\\
+   0\\
    0 \\
-	 0
+	 1
 \end{pmatrix}
 \end{equation}

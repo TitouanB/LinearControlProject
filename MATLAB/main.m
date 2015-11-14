@@ -26,10 +26,11 @@ ue = Au*sin(2*pi*fc*t);
 
 [ts,xs,ys] = sim('nonLinearModel2',TIME_SIM,[],[t' ue']);
 
-
+%%
 figure
 grid on, axP = axes; set(axP, 'FontSize', 14)
 subplot(411), plot(t,ue)
+title('input $u_e$ and states responses in time domain', 'FontSize', 14, 'Interpreter','Latex')
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$u_e$', 'FontSize', 14, 'Interpreter','Latex')
 subplot(412), plot(t,xs(:,1))
@@ -42,6 +43,7 @@ subplot(414), plot(t,xs(:,3))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
 
+%%
 Fs=1/STEP_SIZE;
 Pxx=[];
 f=[];
@@ -58,6 +60,7 @@ UE_db=10*log10(UE);
 figure
 grid on, axP = axes; set(axP, 'FontSize', 14)
 subplot(411), plot(fe,UE_db)
+title('Periodogram Using FFT')
 axis([-1 100 -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('PSD of $u_e$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
@@ -74,7 +77,7 @@ axis([-1 100 -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('PSD of $i$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
 
-
+%%
 %PB4
 Aue=sqrt(fc)*10.^(UE_db/20);
 % ind = find(fe == 19.9996,1);

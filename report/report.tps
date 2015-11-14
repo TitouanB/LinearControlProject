@@ -11,14 +11,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=426
-NormalPos.bottom=467
+NormalPos.right=1242
+NormalPos.bottom=483
 Class=LaTeXView
 Document=report.tex
 
 [Frame0_View0,0]
-TopLine=118
-Cursor=2867
+TopLine=89
+Cursor=2605
 
 [Frame1]
 Flags=0
@@ -29,14 +29,14 @@ MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
 NormalPos.top=26
-NormalPos.right=426
-NormalPos.bottom=467
+NormalPos.right=1242
+NormalPos.bottom=483
 Class=LaTeXView
-Document=Problem2.tex
+Document=Problem1.tex
 
 [Frame1_View0,0]
 TopLine=0
-Cursor=0
+Cursor=648
 
 [SessionInfo]
 FrameCount=2
