@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.10.22)  14 NOV 2015 18:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.10.22)  14 NOV 2015 18:22
 entering extended mode
 **report.tex
 (report.tex
@@ -768,23 +768,30 @@ LaTeX Warning: Command \i invalid in math mode on input line 15.
 
 LaTeX Warning: Command \i invalid in math mode on input line 15.
 
-)
+) (Problem2.tex)
 
-LaTeX Warning: Empty `thebibliography' environment on input line 117.
+LaTeX Warning: Empty `thebibliography' environment on input line 119.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 119.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 121.
 [2]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 119.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 121.
  (report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 119.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 119.
-Package rerunfilecheck Info: File `report.out' has not changed.
-(rerunfilecheck)             Checksum: 6B7EE765DA2C4C7C47A861E8CB3A6947;229.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 119.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 121.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 121.
+
+
+Package rerunfilecheck Warning: File `report.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `report.out':
+(rerunfilecheck)             Before: 6B7EE765DA2C4C7C47A861E8CB3A6947;229
+(rerunfilecheck)             After:  C2D2A5FD0DD2B4B8F0ED1D44E5A4BF09;288.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 121.
  ) 
 Here is how much of TeX's memory you used:
- 12825 strings out of 493673
- 199578 string characters out of 3138720
+ 12829 strings out of 493673
+ 199624 string characters out of 3138720
  318684 words of memory out of 3000000
  15954 multiletter control sequences out of 15000+200000
  58347 words of font info for 46 fonts, out of 3000000 for 9000
@@ -807,9 +814,9 @@ ublic/lm/lmr10.pfb><C:/Users/titou/Desktop/INFO/LATEX/MiKTeX/fonts/type1/public
 r8.pfb><C:/Users/titou/Desktop/INFO/LATEX/MiKTeX/fonts/type1/public/lm/lmro10.p
 fb><C:/Users/titou/Desktop/INFO/LATEX/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><
 C:/Users/titou/Desktop/INFO/LATEX/MiKTeX/fonts/type1/public/lm/lmsy8.pfb>
-Output written on report.pdf (4 pages, 300152 bytes).
+Output written on report.pdf (4 pages, 300460 bytes).
 PDF statistics:
- 125 PDF objects out of 1000 (max. 8388607)
- 21 named destinations out of 1000 (max. 500000)
+ 126 PDF objects out of 1000 (max. 8388607)
+ 22 named destinations out of 1000 (max. 500000)
  40 words of extra memory for PDF output out of 10000 (max. 10000000)
 
