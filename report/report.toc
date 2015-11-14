@@ -1,2 +1,5 @@
 \select@language {english}
 \select@language {english}
+\contentsline {part}{I\hspace {1em}Exercise 1: Distortion Attenuation for Loudspeakers}{1}{part.1}
+\contentsline {section}{\numberline {1}Loudspeakers electrical equivalent circuit}{1}{section.1}
+\contentsline {subsection}{\numberline {1.1}Problem 1}{1}{subsection.1.1}

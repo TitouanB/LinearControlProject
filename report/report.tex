@@ -75,9 +75,44 @@ Titouan Boulmier s150810\\
 \pagenumbering{arabic}
 
 
-\section*{Part 1: Kinematics}
-\subsection*{Problem 1}
+\part{Exercise 1: Distortion Attenuation for Loudspeakers}
+\chapter{Moving-coil Loudspeakers}
+\section{Loudspeakers electrical equivalent circuit}
 
+\begin{figure}[H]
+\includegraphics[scale=.6]{figures/circuit.png}
+\caption{Electrical equivalent lumped element model of the voltage driven electrodynamic loudspeaker for low frequencies. The coupling between the
+electrical and mechanical domain is performed through the gyrator with gy-
+ration constant Bl(x).}
+\label{circuit}
+\end{figure}
+
+\begin{equation} 
+  \label{eq:1.1}    
+  u_e=R_ei+\frac{dL_e(x)}{dx}\frac{dx}{dt}i+L_e(x)\frac{di}{dt}+Bl(x)\frac{dx}{dt}
+\end{equation}
+\begin{equation} 
+  \label{eq:1.2}    
+  Bl(x)i=m_t\frac{d^2x}{dt^2}+R_m\frac{dx}{dt}+k(x)x-\frac{1}{2}\frac{dL_e(e)}{dx}i^2
+\end{equation}
+where
+\begin{equation} 
+  \label{eq:1.3}    
+  Bl(x)=Bl_0+b_1x+b_2x^2
+\end{equation}
+\begin{equation} 
+  \label{eq:1.4}    
+  L_e(x)=L_{e0}+l_1x+l_2x^2
+\end{equation}
+\begin{equation} 
+  \label{eq:1.5}    
+  k(x)=k_0+k_1x+k_2x^2
+\end{equation}
+
+\subsection{Problem 1}
+\input{Problem1}
+\subsection{Problem 2}
+\input{Problem2}
 
   \begin{thebibliography}{2}
 
