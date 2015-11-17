@@ -1,4 +1,4 @@
-\documentclass[11pt,a4paper,fleqn, onesside]{article}
+\documentclass[12pt,a4paper,fleqn, onesside]{report}
 %
 \usepackage[T1]{fontenc}
 \usepackage{amsmath, amssymb, amsthm}
@@ -73,17 +73,16 @@ Titouan Boulmier s150810\\
 \tableofcontents
 \newpage
 \pagenumbering{arabic}
+\def\chaptername{Exercice}
 
 
-\part{Exercise 1: Distortion Attenuation for Loudspeakers}
-\chapter{Moving-coil Loudspeakers}
-\section{Loudspeakers electrical equivalent circuit}
+\chapter{Distortion Attenuation for Loudspeakers}
+\section{Moving-coil Loudspeakers}
+\subsection{Loudspeakers electrical equivalent circuit}
 
 \begin{figure}[H]
 \includegraphics[scale=.6]{figures/circuit.png}
-\caption{Electrical equivalent lumped element model of the voltage driven electrodynamic loudspeaker for low frequencies. The coupling between the
-electrical and mechanical domain is performed through the gyrator with gy-
-ration constant Bl(x).}
+\caption{Electrical equivalent lumped element model of the voltage driven electrodynamic loudspeaker for low frequencies. The coupling between the electrical and mechanical domain is performed through the gyrator with gyration constant Bl(x).}
 \label{circuit}
 \end{figure}
 
@@ -98,10 +97,31 @@ where
   k(x) &= k_0+k_1x+k_2x^2 \label{eq:1.5} 
 \end{align}
 
-\subsection{Problem 1}
+\subsection*{Problem 1}
+\addcontentsline{toc}{subsubsection}{Problem 1}
 \input{Problem1}
-\subsection{Problem 2}
+\subsection*{Problem 2}
+\addcontentsline{toc}{subsubsection}{Problem 2}
 \input{Problem2}
+\subsection*{Problem 3}
+\addcontentsline{toc}{subsubsection}{Problem 3}
+\input{Problem3}
+
+\subsection{Harmonic Distortion}
+\subsection*{Problem 4}
+\addcontentsline{toc}{subsubsection}{Problem 4}
+\input{Problem4}
+\subsection*{Problem 5}
+\addcontentsline{toc}{subsubsection}{Problem 5}
+\input{Problem5}
+
+\subsection{Linearized Model}
+The measured output is set to the voice coil current. Therefore $y(t) = i(t)$.
+We also take $u_{e} = 0$ for the analysis of the linear and nonlinear model around the resting position of the voice coil. 
+
+\subsection*{Problem 6}
+\addcontentsline{toc}{subsubsection}{Problem 6}
+\input{Problem6}
 
   \begin{thebibliography}{2}
 
