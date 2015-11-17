@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.10.22)  14 NOV 2015 20:08
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.10.22)  17 NOV 2015 11:25
 entering extended mode
 **report.tex
 (report.tex
@@ -698,46 +698,12 @@ Package pdftex.def Info: dtulogo.jpg used on input line 58.
  [1
 
 {C:/Users/titou/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map} <./dtulogo2.
-jpg> <./dtulogo.jpg>] (report.toc
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 5.
+jpg> <./dtulogo.jpg>]
 
-(C:\Users\titou\Desktop\INFO\LATEX\MiKTeX\tex\latex\lm\ot1lmr.fd
-File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 5.
+Package hyperref Warning: old toc file detected, not used; run LaTeX again.
 
-(C:\Users\titou\Desktop\INFO\LATEX\MiKTeX\tex\latex\lm\omllmm.fd
-File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 5.
-
-(C:\Users\titou\Desktop\INFO\LATEX\MiKTeX\tex\latex\lm\omslmsy.fd
-File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 5.
-
-(C:\Users\titou\Desktop\INFO\LATEX\MiKTeX\tex\latex\lm\omxlmex.fd
-File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 5.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 5.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 5.
-LaTeX Font Info:    Try loading font information for U+msa on input line 5.
-
-(C:\Users\titou\Desktop\INFO\LATEX\MiKTeX\tex\latex\amsfonts\umsa.fd
-File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-)
-LaTeX Font Info:    Try loading font information for U+msb on input line 5.
-
-(C:\Users\titou\Desktop\INFO\LATEX\MiKTeX\tex\latex\amsfonts\umsb.fd
-File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-))
 \tf@toc=\write4
- [1]
-<figures/circuit.png, id=39, 751.30687pt x 186.6975pt>
+[1] <figures/circuit.png, id=34, 751.30687pt x 186.6975pt>
 File: figures/circuit.png Graphic file (type png)
 
 <use figures/circuit.png>
@@ -748,7 +714,59 @@ Overfull \hbox (23.99625pt too wide) in paragraph at lines 83--86
 [][] 
  []
 
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 90.
+(C:\Users\titou\Desktop\INFO\LATEX\MiKTeX\tex\latex\lm\ot1lmr.fd
+File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 90.
+
+(C:\Users\titou\Desktop\INFO\LATEX\MiKTeX\tex\latex\lm\omllmm.fd
+File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 90.
+
+
+(C:\Users\titou\Desktop\INFO\LATEX\MiKTeX\tex\latex\lm\omslmsy.fd
+File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 90.
+
+
+(C:\Users\titou\Desktop\INFO\LATEX\MiKTeX\tex\latex\lm\omxlmex.fd
+File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10.95> on input line 90.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8> on input line 90.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <6> on input line 90.
+LaTeX Font Info:    Try loading font information for U+msa on input line 90.
+
+(C:\Users\titou\Desktop\INFO\LATEX\MiKTeX\tex\latex\amsfonts\umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 90.
+
+(C:\Users\titou\Desktop\INFO\LATEX\MiKTeX\tex\latex\amsfonts\umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
 (Problem1.tex
+
+LaTeX Warning: Reference `eq:1.1' on page 1 undefined on input line 1.
+
+
+LaTeX Warning: Reference `eq:1.2' on page 1 undefined on input line 1.
+
+
+LaTeX Warning: Reference `eq:1.3' on page 1 undefined on input line 1.
+
+
+LaTeX Warning: Reference `eq:1.4' on page 1 undefined on input line 1.
+
+
+LaTeX Warning: Reference `eq:1.5' on page 1 undefined on input line 1.
+
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
  Make it at least 13.59999pt.
@@ -772,12 +790,19 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 110.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 110.
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: C2D2A5FD0DD2B4B8F0ED1D44E5A4BF09;288.
+
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 110.
  ) 
 Here is how much of TeX's memory you used:
- 12830 strings out of 493673
- 199640 string characters out of 3138720
- 320684 words of memory out of 3000000
+ 12828 strings out of 493673
+ 199620 string characters out of 3138720
+ 319742 words of memory out of 3000000
  15955 multiletter control sequences out of 15000+200000
  58347 words of font info for 46 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
@@ -799,9 +824,9 @@ ublic/lm/lmr10.pfb><C:/Users/titou/Desktop/INFO/LATEX/MiKTeX/fonts/type1/public
 r8.pfb><C:/Users/titou/Desktop/INFO/LATEX/MiKTeX/fonts/type1/public/lm/lmro10.p
 fb><C:/Users/titou/Desktop/INFO/LATEX/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><
 C:/Users/titou/Desktop/INFO/LATEX/MiKTeX/fonts/type1/public/lm/lmsy8.pfb>
-Output written on report.pdf (4 pages, 300581 bytes).
+Output written on report.pdf (4 pages, 294672 bytes).
 PDF statistics:
- 130 PDF objects out of 1000 (max. 8388607)
+ 121 PDF objects out of 1000 (max. 8388607)
  22 named destinations out of 1000 (max. 500000)
  48 words of extra memory for PDF output out of 10000 (max. 10000000)
 
