@@ -103,5 +103,12 @@ axis([-1 100 -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('PSD of $i$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
 
-
+NFFT = length(xs(:,1));
+% Calculate the one sided power spectral density
+X = fft(xs(:,1),NFFT);
+f = Fs*(0:NFFT/2)/NFFT;
+figure;
+plot(f', X(1:NFFT/2+1));X(100)
+% datavec = [xdft(61:60:181)];
+% THD = norm(datavec(2:end),2)/norm(datavec(1),2)
 

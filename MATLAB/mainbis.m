@@ -81,7 +81,7 @@ ylabel('PSD of $i$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
 %PB4
 %Aue=sqrt(Fs)*10.^(UE_db/20);
 
-Aue = sqrt(10.^(UE_db/10)*Fs*length(ue));
+Aue = sqrt(10.^(UE_db(20*TIME_SIM+1)/10)*(20*length(ue)));
 APxx = sqrt(10.^(Pxx_db/10)*Fs*length(xs));
 %APxx=sqrt(Fs)*10.^(Pxx_db/20);
 
