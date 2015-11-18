@@ -1,0 +1,13 @@
+\select@language {english}
+\select@language {english}
+\contentsline {chapter}{\numberline {1}Distortion Attenuation for Loudspeakers}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Moving-coil Loudspeakers}{1}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}Loudspeakers electrical equivalent circuit}{1}{subsection.1.1.1}
+\contentsline {subsubsection}{Problem 1}{2}{section*.3}
+\contentsline {subsubsection}{Problem 2}{3}{section*.4}
+\contentsline {subsubsection}{Problem 3}{3}{section*.5}
+\contentsline {subsection}{\numberline {1.1.2}Harmonic Distortion}{3}{subsection.1.1.2}
+\contentsline {subsubsection}{Problem 4}{3}{section*.6}
+\contentsline {subsubsection}{Problem 5}{3}{section*.7}
+\contentsline {subsection}{\numberline {1.1.3}Linearized Model}{3}{subsection.1.1.3}
+\contentsline {subsubsection}{Problem 6}{3}{section*.8}
