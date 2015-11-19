@@ -4,7 +4,7 @@ All time derivatives are set to zero in order to determine the stationary states
    Bl(x)i &= k(x)x \label{stateq2}
 \end{align}
 
-As $u_{e} = 0$, from \eqref{stateq1} we obtain $i = 0$ and we deduce by substituting in \eqref{stateq2} that $k(x)x$. Then $k(x) = 0$ or $x = 0$. The discriminant of the polynomial $k(x)$ of degree 2 is $\Delta = k_{1}^2-4k_{2}k_{0} < 0$. The voice coil displacement $x$ being real, we discard this value and get:
+As $u_{e} = 0$, from \eqref{stateq1} we obtain $i = 0$ and we deduce by substituting in \eqref{stateq2} that $k(x)x = 0$. Then $k(x) = 0$ or $x = 0$. The discriminant of the polynomial $k(x)$ of degree 2 is $\Delta = k_{1}^2-4k_{2}k_{0} < 0$. The voice coil displacement $x$ being real, we discard this value and get:
 \begin{equation*}
 \text{x}_{0}=
 \begin{pmatrix}
@@ -13,3 +13,101 @@ As $u_{e} = 0$, from \eqref{stateq1} we obtain $i = 0$ and we deduce by substitu
   0
 \end{pmatrix}
 \end{equation*}
+
+We linearise the model $\dot{\text{x}} = h(\text{x},\text{u})$ with $h(\text{x}) = f(\text{x}) + g(\text{x})\text{u}$ around the stationary states:
+\begin{align*}
+   x(t) &= x_{0} + \Delta x(t) = \Delta x(t)\\
+   \dot{x}(t) &= \dot{x}_{0} + \Delta \dot{x}(t) = \Delta \dot{x}(t) \\
+   i(t) &= i_{0} + \Delta i(t) = \Delta i(t)
+\end{align*}
+
+The linear model can then be written in the form:
+\begin{align*}
+   \dot{\text{x}} &= A\text{x} + B\text{u} \\
+   y &= C\text{x}
+\end{align*}
+
+where \begin{equation*} A = \begin{pmatrix}
+  \frac{\partial{h_{1}}}{\partial{\text{x}_{1}}} & \frac{\partial{h_{1}}}{\partial{\text{x}_{2}}} & \frac{\partial{h_{1}}}{\partial{\text{x}_{3}}} \\
+  \frac{\partial{h_{2}}}{\partial{\text{x}_{1}}} & \frac{\partial{h_{2}}}{\partial{\text{x}_{2}}} & \frac{\partial{h_{2}}}{\partial{\text{x}_{3}}} \\
+  \frac{\partial{h_{3}}}{\partial{\text{x}_{1}}} & \frac{\partial{h_{3}}}{\partial{\text{x}_{2}}} & \frac{\partial{h_{3}}}{\partial{\text{x}_{3}}}
+\end{pmatrix}_{\text{x}_{0}}
+\qquad B = \begin{pmatrix}
+\frac{\partial{h_{1}}}{\partial{\text{u}}} \\
+\frac{\partial{h_{2}}}{\partial{\text{u}}} \\
+\frac{\partial{h_{3}}}{\partial{\text{u}}}
+\end{pmatrix}_{\text{x}_{0}}
+\qquad C = \begin{pmatrix}
+\frac{\partial{r}}{\partial{\text{x}_{1}}} & \frac{\partial{r}}{\partial{\text{x}_{2}}} & \frac{\partial{r}}{\partial{\text{x}_{3}}} 
+\end{pmatrix}_{\text{x}_{0}}
+\end{equation*}
+
+We obtain:
+\begin{equation*} 
+\frac{\partial{h_{1}}}{\partial{\text{x}_{1}}} = 0 \qquad \frac{\partial{h_{1}}}{\partial{\text{x}_{2}}} = 1 \qquad \frac{\partial{h_{1}}}{\partial{\text{x}_{3}}} = 0
+\end{equation*}
+\begin{equation*}
+\frac{\partial{h_{2}}}{\partial{\text{x}_{1}}} = \frac{b_{1}\text{x}_{30} + 2b_{2}\text{x}_{10}\text{x}_{30} - (k_{0}+2k_{1}\text{x}_{10}+3k_{2}\text{x}_{10}^2) + l_{2}\text{x}_{20}\text{x}_{30}^2}{m_{t}}
+\end{equation*}
+\begin{equation*}
+\frac{\partial{h_{2}}}{\partial{\text{x}_{2}}} = \frac{-R_{m} + \frac{1}{2}\times (l_{1}+2l_{2}\text{x}_{10})\text{x}_{30}^2}{m_{t}}
+\end{equation*}
+\begin{equation*}
+\frac{\partial{h_{2}}}{\partial{\text{x}_{3}}} = \frac{Bl_{0}+b_{1}\text{x}_{10}+b_{2}\text{x}_{10}^2+(l_{1}+2l_{2}\text{x}_{10})\text{x}_{20}\text{x}_{30}}{m_{t}}
+\end{equation*}
+\begin{multline*}
+\frac{\partial{h_{3}}}{\partial{\text{x}_{1}}} = \frac{(-2l_{2}\text{x}_{20}^2\text{x}_{30}-(b_{1}+2b_{2}\text{x}_{10})\text{x}_{20}) \times (L_{e0}+l_1\text{x}_{10}+l_2\text{x}_{10}^2)}{(L_{e0}+l_1\text{x}_{10}+l_2\text{x}_{10}^2)^2} - (l_{1}+2l_{2}\text{x}_{10}) \times \\
+\frac{(-(R_e+(l_1+2l_2\text{x}_{10})\text{x}_{20}^2)\text{x}_{30}-(Bl_0+b_1\text{x}_{10}+b_2\text{x}_{10}^2)\text{x}_{20})}{(L_{e0}+l_1\text{x}_{10}+l_2\text{x}_{10}^2)^2}
+\end{multline*}
+\begin{equation*}
+\frac{\partial{h_{3}}}{\partial{\text{x}_{2}}} = - \frac{2(l_1+2l_2\text{x}_{10})\text{x}_{20}\text{x}_{30}+Bl_0+b_1\text{x}_{10}+b_2\text{x}_{10}^2}{L_{e0}+l_1\text{x}_{10}+l_2\text{x}_{10}^2}
+\end{equation*}
+\begin{equation*}
+\frac{\partial{h_{3}}}{\partial{\text{x}_{3}}} = - \frac{(l_1+2l_2\text{x}_{10})\text{x}_{20}^2+R_{e}}{L_{e0}+l_1\text{x}_{10}+l_2\text{x}_{10}^2}
+\end{equation*}
+\begin{equation*}
+\frac{\partial{h_{1}}}{\partial{\text{u}}} = 0 \qquad 
+\frac{\partial{h_{2}}}{\partial{\text{u}}} = 0 \qquad
+\frac{\partial{h_{3}}}{\partial{\text{u}}} = \frac{1}{L_{e0}+l_1\text{x}_{10}+l_2\text{x}_{10}^2}
+\end{equation*}
+\begin{equation*}
+\frac{\partial{r}}{\partial{\text{x}_{1}}} = 0 \qquad 
+\frac{\partial{r}}{\partial{\text{x}_{2}}} = 0 \qquad
+\frac{\partial{r}}{\partial{\text{x}_{3}}} = 1
+\end{equation*}\\
+We then substitute $\text{x}_{10} = \text{x}_{20} = \text{x}_{30} = 0$.
+Finally, we get:
+\begin{equation*} A = \begin{pmatrix}
+   0 & 1 & 0 \\
+   -\frac{k_0}{m_t} & -\frac{R_m}{m_t} & \frac{Bl_0}{m_t} \\
+  0 & - \frac{Bl_0}{L_{e0}} & - \frac{R_e}{L_{e0}}  
+\end{pmatrix}
+\qquad B = \begin{pmatrix}
+0 \\
+0 \\
+\frac{1}{L_{e0}}
+\end{pmatrix}
+\qquad C = \begin{pmatrix}
+	0 & 0 & 1 
+\end{pmatrix}
+\end{equation*}\\
+Numerically
+\begin{equation*} A = \begin{pmatrix}
+   0 & 1 & 0 \\
+  -1.20 \cdot 10^5 & -50.46 & 279.19 \\
+  0 & -2.57 \cdot 10^3 & -1.40 \cdot 10^3
+\end{pmatrix}
+\qquad B = \begin{pmatrix}
+0 \\
+0 \\
+177
+\end{pmatrix}
+\qquad C = \begin{pmatrix}
+	0 & 0 & 1 
+\end{pmatrix}
+\end{equation*}\\
+We can check these results with the matlab function \textit{linmod(model,$\text{x}_0$,$u_e$)}:
+\vspace*{-0.5cm}
+\begin{lstlisting}[language=Matlab]
+[A,B,C,D] = linmod('nonLinearModel',[0;0;0],0);
+\end{lstlisting}
