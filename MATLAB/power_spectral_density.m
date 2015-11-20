@@ -5,8 +5,7 @@ function [Pxx,f] = power_spectral_density(x,Fs)
 
     % Calculate the one sided power spectral density
     X = fft(x,NFFT);
-    %figure;
-    %plot(f',X(1:NFFT/2+1))
+
     Px = abs(X).^2/(Fs*NFFT);
     Pxx = Px(1:NFFT/2+1);
     Pxx(2:end-1) = 2*Pxx(2:end-1);
