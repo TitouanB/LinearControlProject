@@ -106,8 +106,8 @@ THDMatlab = thd(xs(:,2), Fs, N);
 %         [tsPb5,xsPb5,ysPb5] = sim('nonLinearModel2',TIME_SIM,[],[t' uePb5']);
 %         AmplitudePb5=[];
 %         for j=1:3
-%             for i=1:6
-%                AmplitudePb5(j,i)=amplitude(xsPb5(:,j), TIME_SIM, fcPb5(i)*i);
+%             for i=1:3
+%                AmplitudePb5(j,i)=amplitude(xsPb5(:,j), TIME_SIM, fcPb5(l)*i);
 %             end
 %         end
 %         d2Pb5(k,l) = AmplitudePb5(2,2)/sqrt(AmplitudePb5(2,1)^2+AmplitudePb5(2,2)^2)*100;
@@ -160,11 +160,11 @@ THDMatlab = thd(xs(:,2), Fs, N);
 %% P7
 
 Mc = [B A*B A^2*B];
-rank(Mc) % = 3 controllable
+rank(Mc); % = 3 controllable
 Mo=[C
     C*A
     C*A^2];
-rank(Mo) % = 3 observable
+rank(Mo); % = 3 observable
 
 
 %% P8
@@ -173,9 +173,9 @@ lambda = eig(A); % lambda in the left half plane -> stable
 syms X
 eq = X^3 + (Re/Le0 + Rm/mt)*X^2 + (Rm*Re+Bl0^2+k0*Le0)/(mt*Le0)*X + k0*Re/(mt*Le0);
 
-eval(subs(eq, X, lambda(1)))
-eval(subs(eq, X, lambda(2)))
-eval(subs(eq, X, lambda(3)))
+eval(subs(eq, X, lambda(1)));
+eval(subs(eq, X, lambda(2)));
+eval(subs(eq, X, lambda(3)));
 
 %% PB9
 %ue = Au*sin(2*pi*fc*t) + Au*sin(2*pi*40*t) + Au*sin(2*pi*60*t);
@@ -186,7 +186,7 @@ grid on, axP = axes; set(axP, 'FontSize', 14)
 subplot(411), plot(t,ue)
 title('input $u_e$ and states responses in time domain', 'FontSize', 14, 'Interpreter','Latex')
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
-ylabel('$u_e$', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$u_e$ [V]', 'FontSize', 14, 'Interpreter','Latex')
 subplot(412), plot(t,xs(:,1))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$x$ [m]', 'FontSize', 14, 'Interpreter','Latex')
@@ -217,19 +217,19 @@ subplot(411), plot(fe,UE_db)
 title('Periodogram Using FFT')
 axis([-1 100 -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
-ylabel('PSD of $u_e$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$P_{u_e}$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
 subplot(412), plot(f(:,1),Pxx_db(:,1))
 axis([-1 100 -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
-ylabel('PSD of $x$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$P_{x}$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
 subplot(413), plot(f(:,2),Pxx_db(:,2))
 axis([-1 100 -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
-ylabel('PSD of $\dot{x}$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$P_{\dot{x}}$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
 subplot(414), plot(f(:,3),Pxx_db(:,3))
 axis([-1 100 -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
-ylabel('PSD of $i$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$P_i$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
 
 %% PB10
 Noise1 = 0.0830*sin(4*pi*fc*t);
@@ -292,5 +292,5 @@ amplitude(xs(:,3), TIME_SIM, 60)
 %%
 %Pb12
 Ts=0.0001; %[s]
-[F,G]=c2d([A,B], Ts);
+[F,G]=c2d(A, B, Ts);
 
