@@ -92,7 +92,7 @@ Finally, we get:
 \end{pmatrix}
 \end{equation*}\\
 Numerically
-\begin{equation*} A = \begin{pmatrix}
+\begin{equation} A = \begin{pmatrix}
    0 & 1 & 0 \\
   -1.20 \cdot 10^5 & -50.46 & 279.19 \\
   0 & -2.57 \cdot 10^3 & -1.40 \cdot 10^3
@@ -105,7 +105,8 @@ Numerically
 \qquad C = \begin{pmatrix}
 	0 & 0 & 1 
 \end{pmatrix}
-\end{equation*}\\
+\label{eq:AandB}
+\end{equation}\\
 We can check these results with the matlab function \textit{linmod(model,$\text{x}_0$,$u_e$)}:
 \vspace*{-0.5cm}
 \begin{lstlisting}[language=Matlab]

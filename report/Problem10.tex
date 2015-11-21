@@ -1,0 +1,9 @@
+First, we extend our model with two input disturbances such that the linear output will also show the second and third order harmonics. The new linearised model is
+\begin{align*}
+   \dot{\text{x}} &= A\text{x} + B\text{u} +B_d\text{d}\\
+   y &= C\text{x}
+\end{align*}
+
+with d $= [d_{i1}, d_{i2}]$.
+
+We know that $d_{i1} = A_{i1}\sin(4\pi f_ct)$ and $d_{i2} = A_{i2}\sin(4\pi f_ct)$ but we have to determine the magnitudes $A_{i1}$ and $A_{i2}$. As this disturbance can be considered as an input, we choose to take $B_d = [B\ B]$ and to find the right magnitudes to use.

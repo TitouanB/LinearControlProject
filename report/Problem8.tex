@@ -1,0 +1,37 @@
+We can derive analytically the eigenvalues of the system dynamical matrix $A$.
+
+\begin{align}
+	\label{eq:eigenValues}
+	det(\lambda I-A) & =det\begin{pmatrix}
+ \lambda & -1 & 0 \\
+  \frac{k_0}{m_t} & \lambda+\frac{R_m}{m_t} & -\frac{Bl_0}{m_t} \\
+  0 & \frac{Bl_0}{Le_0} & \lambda+\frac{Re}{Le_0}
+\end{pmatrix} \\
+& = \lambda^3 +\left(\frac{Re}{Le_0}+\frac{Rm}{m_t}\right)\lambda^2+\left(\frac{RmRe+Bl_0}{m_tLe_0}+\frac{k_0}{m_t}\right)\lambda+\frac{k_0Re}{m_tLe_0}
+\end{align}
+
+We therefore have a third-order polynomial which can be solved with MATLAB but the eigenvalues can also be calculated using
+\begin{lstlisting}[language=Matlab]
+lambda = eig(A);
+\end{lstlisting}
+
+Thus, we obtain
+\begin{equation}
+	\label{eq:eigenValuesValues}
+	\lambda = 1,0.10^2\begin{pmatrix}
+	-2.9573 \\
+	-5.7648 + 4.8571i\\
+	-5.7648 - 4.8571i
+	\end{pmatrix}
+\end{equation}
+
+We can notice that
+\begin{equation}
+	\label{eq:eigenValuesRe}
+	Re(\lambda_i)<0, \ i=1,2,3
+\end{equation}
+
+which means that the system is asymptotically stable. Moreover, the eigenmodes of the system are $e^{\lambda_1t}$, $e^{\lambda_2t}$ and $e^{\lambda_3t}$. We can notice that \begin{equation*}
+\frac{1}{\lambda_1}=\tau_1>\tau_2, \tau_3
+\end{equation*}
+which means that the response of the state $x$ to an input $u_e$ will be slower than the one of $i$ and $\dot{x}$. We can also see that as $\lambda_2$ and $\lambda_3$ have an imaginary part which means that $\dot{x}$ and $i$ will have an oscillatory response.

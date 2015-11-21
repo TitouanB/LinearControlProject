@@ -11,3 +11,9 @@
 \contentsline {subsubsection}{Problem 5}{3}{section*.7}
 \contentsline {subsection}{\numberline {1.1.3}Linearized Model}{3}{subsection.1.1.3}
 \contentsline {subsubsection}{Problem 6}{3}{section*.8}
+\contentsline {subsubsection}{Problem 7}{5}{section*.9}
+\contentsline {subsubsection}{Problem 8}{6}{section*.11}
+\contentsline {subsubsection}{Problem 9}{7}{section*.12}
+\contentsline {subsection}{\numberline {1.1.4}Harmonic distortion and fictitious disturbances}{9}{subsection.1.1.4}
+\contentsline {subsubsection}{Problem 10}{9}{section*.16}
+\contentsline {subsubsection}{Problem 11}{9}{section*.17}

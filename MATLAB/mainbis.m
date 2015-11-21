@@ -232,30 +232,28 @@ xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('PSD of $i$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
 
 %% PB10
-Bd=Amplitude(:, 2:3);
-Bd(3,:)=Bd(3,:)/Le0;
-Noise1 = 5*sin(4*pi*fc*t);
-Noise2 = 0.025*sin(6*pi*fc*t);
+Noise1 = 0.0830*sin(4*pi*fc*t);
+Noise2 = 0.0303*sin(6*pi*fc*t);
 Noise = [Noise1; Noise2];
 %ue = Au*sin(2*pi*fc*t) + Au*sin(4*pi*fc*t) + Au*sin(6*pi*fc*t);
 Bd=[B B];
 [ts,xs,ys] = sim('linearModelNoise',TIME_SIM,[],[t' ue'], [t' Noise1'], [t' Noise2']);
 %time domain
-figure
-grid on, axP = axes; set(axP, 'FontSize', 14)
-subplot(411), plot(t,ue)
-title('input $u_e$ and states responses in time domain', 'FontSize', 14, 'Interpreter','Latex')
-xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
-ylabel('$u_e$', 'FontSize', 14, 'Interpreter','Latex')
-subplot(412), plot(t,xs(:,1))
-xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
-ylabel('$x$ [m]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(413), plot(t,xs(:,2))
-xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
-ylabel('$\dot{x}$ [m/s]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(414), plot(t,xs(:,3))
-xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
-ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
+% figure
+% grid on, axP = axes; set(axP, 'FontSize', 14)
+% subplot(411), plot(t,ue)
+% title('input $u_e$ and states responses in time domain', 'FontSize', 14, 'Interpreter','Latex')
+% xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
+% ylabel('$u_e$', 'FontSize', 14, 'Interpreter','Latex')
+% subplot(412), plot(t,xs(:,1))
+% xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
+% ylabel('$x$ [m]', 'FontSize', 14, 'Interpreter','Latex')
+% subplot(413), plot(t,xs(:,2))
+% xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
+% ylabel('$\dot{x}$ [m/s]', 'FontSize', 14, 'Interpreter','Latex')
+% subplot(414), plot(t,xs(:,3))
+% xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
+% ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
 % freq domain
 Pxx=[];
 f=[];
@@ -286,8 +284,9 @@ subplot(414), plot(f(:,3),Pxx_db(:,3))
 axis([-1 100 -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('PSD of $i$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
-Pxx_db(40*TIME_SIM+1, 3)
+Pxx_db(40*TIME_SIM+1, 3), Pxx_db(60*TIME_SIM+1, 3)
 
-
+amplitude(xs(:,3), TIME_SIM, 40)
+amplitude(xs(:,3), TIME_SIM, 60)
 
 
