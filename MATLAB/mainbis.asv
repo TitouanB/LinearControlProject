@@ -291,6 +291,5 @@ amplitude(xs(:,3), TIME_SIM, 60)
 
 %%
 %Pb12
-Ts=0.0001; %[s]
-[F,G]=c2d([A,B], Ts);
+Ts=
 
