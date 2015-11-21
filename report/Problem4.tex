@@ -1,0 +1,28 @@
+The analysis will be restricted to the voice coil velocity $\dot{x}$. The Total Harmonic Distortion (THD) is described by
+\begin{equation}
+THD = \frac{\sqrt{\sum_{n=2}^{N}A_n^2}}{\sqrt{\sum_{n=1}^{N}A_n^2}} \ 100\%
+\end{equation}
+where $A_1$ the amplitude of the fundamental frequency and $A_n$ the amplitudes of the harmonics. 
+
+To compute THD for the 5 harmonics after the fundamental frequency $f_c$ we need to find the 6 amplitudes corresponding to the fundamental frequency pikes and the 5 following harmonics. To that purpose, a function \textit{amplitude} was implemented (see below) with \textit{\text{x}} the signal and \textit{fr} the frequency at which we desire to know the amplitude of the spike. The Fast Fourier Transform is computed but not the spectral power density as previously. 
+\begin{lstlisting}[language=Matlab]
+function [ res ] = amplitude(x, TIME_SIM, fr)
+	NFFT = length(x);
+	X = fft(x,NFFT)/(NFFT);	
+	X = 2*abs(X(1:NFFT/2+1)); 
+	res = X(fr*TIME_SIM+1);
+end
+\end{lstlisting}
+
+Finally for a TIME\_SIM = 5s, for the voice coil velocity $THD = 2.57 \ \%$. 
+We then use the equations \eqref{d2} and \eqref{d3} to compute the second and third order harmonic distortion. We obtain $d_2 = 2.48 \ \%$ and $d_3 = 0.65 \ \%$.
+\begin{equation}
+d_2 = \frac{A_2}{\sqrt{A_1^2 + A_2^2}} \ 100\%
+\label{d2}
+\end{equation}
+\begin{equation}
+d_3 = \frac{A_3}{\sqrt{A_1^2 + A_3^2}} \ 100\%
+\label{d3}
+\end{equation}
+
+We can notice that $d_2$ corresponds to the THD calculated for $N=2$. Because the amplitudes of the harmonics decrease when the order gets bigger, it is logical that the values of THD and $d_2$ are quite similar. On the contrary, $A_3$ is negligible in front of $A_1$, that why $d_3$ is small and far from the THD. 
