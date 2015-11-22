@@ -308,7 +308,7 @@ lambdad=eig(F);
 k=0:TIME_SIM/STEP_SIZE;
 ued=Au*sin(2*pi*fc*k*Ts);
 Noise1d = 0.0830*sin(4*pi*fc*k*Ts);
-Noise2d = 0.0303*sin(6*pi*fc*k*Ts);
+Noise2d = 0.075*sin(6*pi*fc*k*Ts);
 
 [ts,xs,ys] = sim('discreteTimeModel',TIME_SIM,[],[(k*Ts)' ued'], [(k*Ts)' Noise1d'], [(k*Ts)' Noise2d']);
 
@@ -368,12 +368,33 @@ rank(Mc); % = 3, controllable
 
 %% Pb15
 C=[1 0 0];
-P=[-0.97, -0.99, -0.98];
+P=[-0.999, -0.998, -0.997];
 K=acker(F,G,P);
 Fk=F-G*K;
 sys=ss(Fk,G,C,[]);
-bode(sys, -10:0.1:30);
+bode(sys, -10:0.1:200);
 
+%%
+Ax=0.0008; %[m]
+xref=Ax*sin(2*pi*fc*k*Ts);
+[ts,xs,ys] = sim('discreteTimeModel',TIME_SIM,[],[(k*Ts)' xref'], [(k*Ts)' Noise1d'], [(k*Ts)' Noise2d']);
+
+%time domain
+figure
+grid on, axP = axes; set(axP, 'FontSize', 14)
+subplot(411), plot((k*Ts),xref)
+title('input $u_e$ and states responses in time domain', 'FontSize', 14, 'Interpreter','Latex')
+xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$u_e$', 'FontSize', 14, 'Interpreter','Latex')
+subplot(412), plot((k*Ts),xs(:,1))
+xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$x$ [m]', 'FontSize', 14, 'Interpreter','Latex')
+subplot(413), plot((k*Ts),xs(:,2))
+xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$\dot{x}$ [m/s]', 'FontSize', 14, 'Interpreter','Latex')
+subplot(414), plot((k*Ts),xs(:,3))
+xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
 
 
 
