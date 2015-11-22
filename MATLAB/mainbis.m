@@ -233,27 +233,35 @@ ylabel('$P_i$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
 
 %% PB10
 Noise1 = 0.0830*sin(4*pi*fc*t);
-Noise2 = 0.0303*sin(6*pi*fc*t);
+Noise2 = 0.075*sin(6*pi*fc*t);
 Noise = [Noise1; Noise2];
-%ue = Au*sin(2*pi*fc*t) + Au*sin(4*pi*fc*t) + Au*sin(6*pi*fc*t);
+
+% sys=ss(A,B,C,[0]);
+% w = [2:2:6]*pi*fc;
+% [MAG,PHASE] = bode(sys,w)
+% MAG=[MAG(1) MAG(2) MAG(3)];
+% Amplitude(3,1:3)./MAG
+
 Bd=[B B];
 [ts,xs,ys] = sim('linearModelNoise',TIME_SIM,[],[t' ue'], [t' Noise1'], [t' Noise2']);
 %time domain
-% figure
-% grid on, axP = axes; set(axP, 'FontSize', 14)
-% subplot(411), plot(t,ue)
-% title('input $u_e$ and states responses in time domain', 'FontSize', 14, 'Interpreter','Latex')
-% xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
-% ylabel('$u_e$', 'FontSize', 14, 'Interpreter','Latex')
-% subplot(412), plot(t,xs(:,1))
-% xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
-% ylabel('$x$ [m]', 'FontSize', 14, 'Interpreter','Latex')
-% subplot(413), plot(t,xs(:,2))
-% xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
-% ylabel('$\dot{x}$ [m/s]', 'FontSize', 14, 'Interpreter','Latex')
-% subplot(414), plot(t,xs(:,3))
-% xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
-% ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
+figure
+grid on, axP = axes; set(axP, 'FontSize', 14)
+subplot(411), plot(t,ue)
+title('input $u_e$ and states responses in time domain', 'FontSize', 14, 'Interpreter','Latex')
+xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$u_e$', 'FontSize', 14, 'Interpreter','Latex')
+subplot(412), plot(t,xs(:,1))
+xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$x$ [m]', 'FontSize', 14, 'Interpreter','Latex')
+subplot(413), plot(t,xs(:,2))
+xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$\dot{x}$ [m/s]', 'FontSize', 14, 'Interpreter','Latex')
+subplot(414), plot(t,xs(:,3))
+xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
+
+
 % freq domain
 Pxx=[];
 f=[];
@@ -284,10 +292,10 @@ subplot(414), plot(f(:,3),Pxx_db(:,3))
 axis([-1 100 -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('PSD of $i$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
-Pxx_db(40*TIME_SIM+1, 3), Pxx_db(60*TIME_SIM+1, 3)
+Pxx_db(40*TIME_SIM+1, 3), Pxx_db(60*TIME_SIM+1, 3);
 
-amplitude(xs(:,3), TIME_SIM, 40)
-amplitude(xs(:,3), TIME_SIM, 60)
+amplitude(xs(:,3), TIME_SIM, 40);
+amplitude(xs(:,3), TIME_SIM, 60);
 
 %%
 %Pb12
@@ -311,13 +319,13 @@ subplot(411), plot((k*Ts),ued)
 title('input $u_e$ and states responses in time domain', 'FontSize', 14, 'Interpreter','Latex')
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$u_e$', 'FontSize', 14, 'Interpreter','Latex')
-subplot(412), stairs((k*Ts),xs(:,1))
+subplot(412), plot((k*Ts),xs(:,1))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$x$ [m]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(413), stairs((k*Ts),xs(:,2))
+subplot(413), plot((k*Ts),xs(:,2))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$\dot{x}$ [m/s]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(414), stairs((k*Ts),xs(:,3))
+subplot(414), plot((k*Ts),xs(:,3))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
 
@@ -352,3 +360,21 @@ subplot(414), plot(f(:,3),Pxx_db(:,3))
 axis([-1 100 -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('PSD of $i$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
+
+
+%% Pb14
+Mc=[G F*G F^2*G];
+rank(Mc); % = 3, controllable
+
+%% Pb15
+C=[1 0 0];
+P=[-0.97, -0.99, -0.98];
+K=acker(F,G,P);
+Fk=F-G*K;
+sys=ss(Fk,G,C,[]);
+bode(sys, -10:0.1:30);
+
+
+
+
+
