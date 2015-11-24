@@ -24,7 +24,7 @@ Au = 5; % V
 fc = 20; % Hz
 ue = Au*sin(2*pi*fc*t);
 
-[ts,xs,ys] = sim('nonLinearModel2',TIME_SIM,[],[t' ue']);
+[ts,xs,ys] = sim('modelP3',TIME_SIM,[],[t' ue']);
 
 %%
 figure
@@ -152,9 +152,9 @@ THDMatlab = thd(xs(:,2), Fs, N);
 
 %% P6
 
-[x,u,y,dx,options] = trim('nonLinearModel2',[0;0;0],[0],[],[],[1],[]);
+[x,u,y,dx,options] = trim('modelP3',[0;0;0],[0],[],[],[1],[]);
 
-[A,B,C,D] = linmod('nonLinearModel2',[0;0;0],0);
+[A,B,C,D] = linmod('modelP3',[0;0;0],0);
 
 
 %% P7
@@ -179,7 +179,7 @@ eval(subs(eq, X, lambda(3)));
 
 %% PB9
 %ue = Au*sin(2*pi*fc*t) + Au*sin(2*pi*40*t) + Au*sin(2*pi*60*t);
-[ts,xs,ys] = sim('linearModelMatrix',TIME_SIM,[],[t' ue']);
+[ts,xs,ys] = sim('modelP9',TIME_SIM,[],[t' ue']);
 
 figure
 grid on, axP = axes; set(axP, 'FontSize', 14)
@@ -243,7 +243,7 @@ Noise = [Noise1; Noise2];
 % Amplitude(3,1:3)./MAG
 
 Bd=[B B];
-[ts,xs,ys] = sim('linearModelNoise',TIME_SIM,[],[t' ue'], [t' Noise1'], [t' Noise2']);
+[ts,xs,ys] = sim('modelP11',TIME_SIM,[],[t' ue'], [t' Noise1'], [t' Noise2']);
 %time domain
 figure
 grid on, axP = axes; set(axP, 'FontSize', 14)
@@ -310,7 +310,7 @@ ued=Au*sin(2*pi*fc*k*Ts);
 Noise1d = 0.0830*sin(4*pi*fc*k*Ts);
 Noise2d = 0.075*sin(6*pi*fc*k*Ts);
 
-[ts,xs,ys] = sim('discreteTimeModel',TIME_SIM,[],[(k*Ts)' ued'], [(k*Ts)' Noise1d'], [(k*Ts)' Noise2d']);
+[ts,xs,ys] = sim('modelP13',TIME_SIM,[],[(k*Ts)' ued'], [(k*Ts)' Noise1d'], [(k*Ts)' Noise2d']);
 
 %time domain
 figure
@@ -368,16 +368,28 @@ rank(Mc); % = 3, controllable
 
 %% Pb15
 C=[1 0 0];
-P=[-0.999, -0.998, -0.997];
-K=acker(F,G,P);
+%continous
+Pconti= [-4000, -1200-1000i, -1200+1000i];%[-2000, -1200-1000i, -1200+1000i]; %[-900, -700-400i, -700+400i];
+Kcon=acker(A,B,Pconti);
+Ak=A-B*Kcon;
+sys=ss(A,B,C,[]);
+sys_k=ss(Ak,B,C,[]);
+w = 2*pi*fc;
+figure;
+bode(sys_k, [0:0.1:10000]);
+[MAG2,PHASE] = bode(sys,w);
+Pdisc = exp(Pconti*Ts);
+
+K=acker(F,G,Pdisc);
 Fk=F-G*K;
-sys=ss(Fk,G,C,[]);
-bode(sys, -10:0.1:200);
+sys_d=ss(F,G,C,[]);
 
 %%
 Ax=0.0008; %[m]
+N=inv(C*inv(-Ak)*B);
+%Av=Ax*N; %8.3749; %Ax/MAG2;
 xref=Ax*sin(2*pi*fc*k*Ts);
-[ts,xs,ys] = sim('discreteTimeModel',TIME_SIM,[],[(k*Ts)' xref'], [(k*Ts)' Noise1d'], [(k*Ts)' Noise2d']);
+[ts,xs,ys] = sim('modelP15',TIME_SIM,[],[(k*Ts)' xref'], [(k*Ts)' Noise1d'], [(k*Ts)' Noise2d']);
 
 %time domain
 figure
@@ -386,7 +398,9 @@ subplot(411), plot((k*Ts),xref)
 title('input $u_e$ and states responses in time domain', 'FontSize', 14, 'Interpreter','Latex')
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$u_e$', 'FontSize', 14, 'Interpreter','Latex')
-subplot(412), plot((k*Ts),xs(:,1))
+subplot(412), plot((k*Ts),xs(:,1)); hold on; plot((k*Ts),xref)
+l = legend('state $x$', '$x_{ref}$');
+set(l, 'Interpreter','Latex');
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$x$ [m]', 'FontSize', 14, 'Interpreter','Latex')
 subplot(413), plot((k*Ts),xs(:,2))
@@ -396,6 +410,53 @@ subplot(414), plot((k*Ts),xs(:,3))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
 
+%% Pb16
+xref_c = Ax*sin(2*pi*fc*t);
+Noise10 = 0*t;
+Noise20 = 0*t;
+[ts,xs,ys] = sim('modelP16',TIME_SIM,[],[t' xref_c'], [t' Noise10'], [t' Noise20']);
+
+%time domain
+figure
+grid on, axP = axes; set(axP, 'FontSize', 14)
+subplot(411), plot(t,xref_c)
+title('input $u_e$ and states responses in time domain', 'FontSize', 14, 'Interpreter','Latex')
+xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$u_e$', 'FontSize', 14, 'Interpreter','Latex')
+subplot(412), plot(t,xs(:,1)); hold on; plot(t,xref_c);
+l = legend('state $x$', '$x_{ref}$');
+set(l, 'Interpreter','Latex');
+xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$x$ [m]', 'FontSize', 14, 'Interpreter','Latex')
+subplot(413), plot(t,xs(:,2))
+xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$\dot{x}$ [m/s]', 'FontSize', 14, 'Interpreter','Latex')
+subplot(414), plot(t,xs(:,3))
+xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
+
+%non zero noise
+
+[ts,xs,ys] = sim('modelP16',TIME_SIM,[],[t' xref_c'], [t' Noise1'], [t' Noise2']);
+
+%time domain
+figure
+grid on, axP = axes; set(axP, 'FontSize', 14)
+subplot(411), plot(t,xref_c)
+title('input $u_e$ and states responses in time domain', 'FontSize', 14, 'Interpreter','Latex')
+xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$u_e$', 'FontSize', 14, 'Interpreter','Latex')
+subplot(412), plot(t,xs(:,1)); hold on; plot(t,xref_c);
+l = legend('state $x$', '$x_{ref}$');
+set(l, 'Interpreter','Latex');
+xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$x$ [m]', 'FontSize', 14, 'Interpreter','Latex')
+subplot(413), plot(t,xs(:,2))
+xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$\dot{x}$ [m/s]', 'FontSize', 14, 'Interpreter','Latex')
+subplot(414), plot(t,xs(:,3))
+xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
 
 
 
