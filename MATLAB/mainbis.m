@@ -89,12 +89,12 @@ for j=1:3
     end
 end
 
-N = 6;
-THD = THD(Amplitude(2,:),N);
+NumberHarmonic = 6;
+THDpb4 = THD(Amplitude(2,:),NumberHarmonic);
 d2 = Amplitude(2,2)/sqrt(Amplitude(2,1)^2+Amplitude(2,2)^2)*100;
 d3 = Amplitude(2,3)/sqrt(Amplitude(2,1)^2+Amplitude(2,3)^2)*100;
 
-THDMatlab = thd(xsr(:,2), Fs, N);
+THDMatlab = thd(xsr(:,2), Fs, NumberHarmonic);
 
 %% PB5
 
@@ -238,15 +238,13 @@ ylabel('$P_i$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
 %% PB10
 sys=ss(A,B,C,[0]);
 w = [2:2:6]*pi*fc;
-[MAG,PHASE] = bode(sys,w)
+[MAG,PHASE] = bode(sys,w);
 MAG=[MAG(1) MAG(2) MAG(3)];
 NoiseAmp = Amplitude(3,1:3)./MAG;
 
 Noise1 = NoiseAmp(2)*sin(4*pi*fc*t);
 Noise2 = NoiseAmp(3)*sin(6*pi*fc*t);
 Noise = [Noise1; Noise2];
-
-
 
 Bd=[B B];
 [ts,xs,ys] = sim('modelP11',TIME_SIM,[],[t' ue'], [t' Noise1'], [t' Noise2']); 
@@ -350,6 +348,7 @@ end
 Pxx_db=10*log10(Pxx);
 UE_db=10*log10(UE);
 
+%freq domain
 figure
 grid on, axP = axes; set(axP, 'FontSize', 14)
 subplot(411), plot(fe,UE_db)
@@ -471,6 +470,82 @@ ylabel('$\dot{x}$ [m/s]', 'FontSize', 14, 'Interpreter','Latex')
 subplot(414), plot(tr,xsr(:,3))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
+
+%% P17
+xref_c = Ax*sin(2*pi*fc*t);
+Au_needed = Ax*N; %should be <40V according to paper
+
+[ts,xs,ys] = sim('modelP16',TIME_SIM,[],[t' xref_c'], [t' Noise1'], [t' Noise2']);
+xsr = xs(1/STEP_SIZE:length(t),:);
+xref_cr = xref_c(1/STEP_SIZE:length(t));  
+
+%time domain
+figure
+grid on, axP = axes; set(axP, 'FontSize', 14)
+subplot(411), plot(tr,xref_cr)
+title('input $u_e$ and states responses in time domain', 'FontSize', 14, 'Interpreter','Latex')
+xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$u_e$', 'FontSize', 14, 'Interpreter','Latex')
+subplot(412), plot(tr,xsr(:,1)); hold on; plot(tr,xref_cr);
+l = legend('state $x$', '$x_{ref}$');
+set(l, 'Interpreter','Latex');
+xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$x$ [m]', 'FontSize', 14, 'Interpreter','Latex')
+subplot(413), plot(tr,xsr(:,2))
+xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$\dot{x}$ [m/s]', 'FontSize', 14, 'Interpreter','Latex')
+subplot(414), plot(tr,xsr(:,3))
+xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
+
+%freq domain
+Pxx=[];
+f=[];
+for i = 1:1:3
+[Pxx_tmp, f_tmp]=power_spectral_density(xsr(:,i), Fs);
+Pxx=[Pxx, Pxx_tmp];
+f=[f, f_tmp'];
+end
+[XREF, fe]=power_spectral_density(xref_cr, Fs);
+Pxx_db=10*log10(Pxx);
+XREF_db=10*log10(XREF);
+
+figure
+grid on, axP = axes; set(axP, 'FontSize', 14)
+subplot(411), plot(fe,XREF_db)
+title('Periodogram Using FFT')
+axis([-1 100 -inf inf]);
+xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('PSD of $u_e$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
+subplot(412), plot(f(:,1),Pxx_db(:,1))
+axis([-1 100 -inf inf]);
+xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('PSD of $x$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
+subplot(413), plot(f(:,2),Pxx_db(:,2))
+axis([-1 100 -inf inf]);
+xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('PSD of $\dot{x}$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
+subplot(414), plot(f(:,3),Pxx_db(:,3))
+axis([-1 100 -inf inf]);
+xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('PSD of $i$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
+
+Amplitude_control=[];
+for j=1:3
+    for i=1:6
+       Amplitude_control(j,i)=amplituder(xsr(:,j), TIME_SIM, 20*i);
+    end
+end
+
+numberHarmo = 6;
+THD_control = THD(Amplitude_control(2,:),numberHarmo);
+d2_control = Amplitude_control(2,2)/sqrt(Amplitude_control(2,1)^2+Amplitude_control(2,2)^2)*100;
+d3_control = Amplitude_control(2,3)/sqrt(Amplitude_control(2,1)^2+Amplitude_control(2,3)^2)*100;
+
+%% Pb 18
+
+
+
 
 
 

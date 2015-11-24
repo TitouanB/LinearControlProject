@@ -1,9 +1,10 @@
-function res = THD(A,N)
+function res = THD(Amplitudes,NumberHarmo)
     den = 0;
-    for i=1:N
-        den = den + A(i)^2;
+    num = 0;
+    for i=1:NumberHarmo
+        den = den + Amplitudes(i)^2;
     end
-    num = den - A(1)^2;
+    num = den - Amplitudes(1)^2;
     
     res = sqrt(num)/sqrt(den)*100;
 end
