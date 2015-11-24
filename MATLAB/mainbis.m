@@ -25,21 +25,24 @@ fc = 20; % Hz
 ue = Au*sin(2*pi*fc*t);
 
 [ts,xs,ys] = sim('modelP3',TIME_SIM,[],[t' ue']);
+uer = ue(1/STEP_SIZE:length(t));  %uer = ue; % uer = ue(1/STEP_SIZE:length(t)); 
+xsr = xs(1/STEP_SIZE:length(t),:); %xsr = xs; % xsr = xs(1/STEP_SIZE:length(t),:);
+tr = t(1/STEP_SIZE:length(t)); %tr = t; % tr = t(1/STEP_SIZE:length(t));
 
 %%
 figure
 grid on, axP = axes; set(axP, 'FontSize', 14)
-subplot(411), plot(t,ue)
+subplot(411), plot(tr,uer)
 title('input $u_e$ and states responses in time domain', 'FontSize', 14, 'Interpreter','Latex')
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$u_e$ [V]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(412), plot(t,xs(:,1))
+subplot(412), plot(tr,xsr(:,1))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$x$ [m]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(413), plot(t,xs(:,2))
+subplot(413), plot(tr,xsr(:,2))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$\dot{x}$ [m/s]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(414), plot(t,xs(:,3))
+subplot(414), plot(tr,xsr(:,3))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
 
@@ -48,11 +51,11 @@ Fs=1/STEP_SIZE;
 Pxx=[];
 f=[];
 for i = 1:1:3
-    [Pxx_tmp, f_tmp]=power_spectral_density(xs(:,i), Fs);
+    [Pxx_tmp, f_tmp]=power_spectral_density(xsr(:,i), Fs);
     Pxx=[Pxx, Pxx_tmp];
     f=[f, f_tmp'];
 end
-[UE, fe]=power_spectral_density(ue, Fs);
+[UE, fe]=power_spectral_density(uer, Fs);
 
 Pxx_db=10*log10(Pxx);
 UE_db=10*log10(UE);
@@ -82,7 +85,7 @@ ylabel('$P_{i}$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
 Amplitude=[];
 for j=1:3
     for i=1:6
-       Amplitude(j,i)=amplitude(xs(:,j), TIME_SIM, 20*i);
+       Amplitude(j,i)=amplituder(xsr(:,j), TIME_SIM, 20*i);
     end
 end
 
@@ -91,7 +94,7 @@ THD = THD(Amplitude(2,:),N);
 d2 = Amplitude(2,2)/sqrt(Amplitude(2,1)^2+Amplitude(2,2)^2)*100;
 d3 = Amplitude(2,3)/sqrt(Amplitude(2,1)^2+Amplitude(2,3)^2)*100;
 
-THDMatlab = thd(xs(:,2), Fs, N);
+THDMatlab = thd(xsr(:,2), Fs, N);
 
 %% PB5
 
@@ -179,21 +182,22 @@ eval(subs(eq, X, lambda(3)));
 
 %% PB9
 %ue = Au*sin(2*pi*fc*t) + Au*sin(2*pi*40*t) + Au*sin(2*pi*60*t);
-[ts,xs,ys] = sim('modelP9',TIME_SIM,[],[t' ue']);
+[ts,xs,ys] = sim('modelP9',TIME_SIM,[],[t' ue']); 
+xsr = xs(1/STEP_SIZE:length(t),:); %xsr = xs; % xsr = xs(1/STEP_SIZE:length(t),:);
 
 figure
 grid on, axP = axes; set(axP, 'FontSize', 14)
-subplot(411), plot(t,ue)
+subplot(411), plot(tr,uer)
 title('input $u_e$ and states responses in time domain', 'FontSize', 14, 'Interpreter','Latex')
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$u_e$ [V]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(412), plot(t,xs(:,1))
+subplot(412), plot(tr,xsr(:,1))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$x$ [m]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(413), plot(t,xs(:,2))
+subplot(413), plot(tr,xsr(:,2))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$\dot{x}$ [m/s]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(414), plot(t,xs(:,3))
+subplot(414), plot(tr,xsr(:,3))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
 
@@ -202,11 +206,11 @@ ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
 Pxx=[];
 f=[];
 for i = 1:1:3
-    [Pxx_tmp, f_tmp]=power_spectral_density(xs(:,i), Fs);
+    [Pxx_tmp, f_tmp]=power_spectral_density(xsr(:,i), Fs);
     Pxx=[Pxx, Pxx_tmp];
     f=[f, f_tmp'];
 end
-[UE, fe]=power_spectral_density(ue, Fs);
+[UE, fe]=power_spectral_density(uer, Fs);
 
 Pxx_db=10*log10(Pxx);
 UE_db=10*log10(UE);
@@ -232,32 +236,35 @@ xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$P_i$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
 
 %% PB10
-Noise1 = 0.0830*sin(4*pi*fc*t);
-Noise2 = 0.075*sin(6*pi*fc*t);
+sys=ss(A,B,C,[0]);
+w = [2:2:6]*pi*fc;
+[MAG,PHASE] = bode(sys,w)
+MAG=[MAG(1) MAG(2) MAG(3)];
+NoiseAmp = Amplitude(3,1:3)./MAG;
+
+Noise1 = NoiseAmp(2)*sin(4*pi*fc*t);
+Noise2 = NoiseAmp(3)*sin(6*pi*fc*t);
 Noise = [Noise1; Noise2];
 
-% sys=ss(A,B,C,[0]);
-% w = [2:2:6]*pi*fc;
-% [MAG,PHASE] = bode(sys,w)
-% MAG=[MAG(1) MAG(2) MAG(3)];
-% Amplitude(3,1:3)./MAG
+
 
 Bd=[B B];
-[ts,xs,ys] = sim('modelP11',TIME_SIM,[],[t' ue'], [t' Noise1'], [t' Noise2']);
+[ts,xs,ys] = sim('modelP11',TIME_SIM,[],[t' ue'], [t' Noise1'], [t' Noise2']); 
+xsr = xs(1/STEP_SIZE:length(t),:); 
 %time domain
 figure
 grid on, axP = axes; set(axP, 'FontSize', 14)
-subplot(411), plot(t,ue)
+subplot(411), plot(tr,uer)
 title('input $u_e$ and states responses in time domain', 'FontSize', 14, 'Interpreter','Latex')
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$u_e$', 'FontSize', 14, 'Interpreter','Latex')
-subplot(412), plot(t,xs(:,1))
+subplot(412), plot(tr,xsr(:,1))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$x$ [m]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(413), plot(t,xs(:,2))
+subplot(413), plot(tr,xsr(:,2))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$\dot{x}$ [m/s]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(414), plot(t,xs(:,3))
+subplot(414), plot(tr,xsr(:,3))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
 
@@ -266,11 +273,11 @@ ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
 Pxx=[];
 f=[];
 for i = 1:1:3
-[Pxx_tmp, f_tmp]=power_spectral_density(xs(:,i), Fs);
+[Pxx_tmp, f_tmp]=power_spectral_density(xsr(:,i), Fs);
 Pxx=[Pxx, Pxx_tmp];
 f=[f, f_tmp'];
 end
-[UE, fe]=power_spectral_density(ue, Fs);
+[UE, fe]=power_spectral_density(uer, Fs);
 Pxx_db=10*log10(Pxx);
 UE_db=10*log10(UE);
 figure
@@ -307,25 +314,27 @@ lambdad=eig(F);
 %% Pb13
 k=0:TIME_SIM/STEP_SIZE;
 ued=Au*sin(2*pi*fc*k*Ts);
-Noise1d = 0.0830*sin(4*pi*fc*k*Ts);
-Noise2d = 0.075*sin(6*pi*fc*k*Ts);
+Noise1d = NoiseAmp(2)*sin(4*pi*fc*k*Ts);
+Noise2d = NoiseAmp(3)*sin(6*pi*fc*k*Ts);
 
 [ts,xs,ys] = sim('modelP13',TIME_SIM,[],[(k*Ts)' ued'], [(k*Ts)' Noise1d'], [(k*Ts)' Noise2d']);
-
+uedr = ued(1/STEP_SIZE:length(k));   
+xsr = xs(1/STEP_SIZE:length(k),:);
+kr = k(1/STEP_SIZE:length(k));
 %time domain
 figure
 grid on, axP = axes; set(axP, 'FontSize', 14)
-subplot(411), plot((k*Ts),ued)
+subplot(411), plot((kr*Ts),uedr)
 title('input $u_e$ and states responses in time domain', 'FontSize', 14, 'Interpreter','Latex')
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$u_e$', 'FontSize', 14, 'Interpreter','Latex')
-subplot(412), plot((k*Ts),xs(:,1))
+subplot(412), plot((kr*Ts),xsr(:,1))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$x$ [m]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(413), plot((k*Ts),xs(:,2))
+subplot(413), plot((kr*Ts),xsr(:,2))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$\dot{x}$ [m/s]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(414), plot((k*Ts),xs(:,3))
+subplot(414), plot((kr*Ts),xsr(:,3))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
 
@@ -333,11 +342,11 @@ ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
 Pxx=[];
 f=[];
 for i = 1:1:3
-[Pxx_tmp, f_tmp]=power_spectral_density(xs(:,i), Fs);
+[Pxx_tmp, f_tmp]=power_spectral_density(xsr(:,i), Fs);
 Pxx=[Pxx, Pxx_tmp];
 f=[f, f_tmp'];
 end
-[UE, fe]=power_spectral_density(ued, Fs);
+[UE, fe]=power_spectral_density(uedr, Fs);
 Pxx_db=10*log10(Pxx);
 UE_db=10*log10(UE);
 
@@ -390,23 +399,25 @@ N=inv(C*inv(-Ak)*B);
 %Av=Ax*N; %8.3749; %Ax/MAG2;
 xref=Ax*sin(2*pi*fc*k*Ts);
 [ts,xs,ys] = sim('modelP15',TIME_SIM,[],[(k*Ts)' xref'], [(k*Ts)' Noise1d'], [(k*Ts)' Noise2d']);
+xrefr = xref(1/STEP_SIZE:length(k));   
+xsr = xs(1/STEP_SIZE:length(k),:);
 
 %time domain
 figure
 grid on, axP = axes; set(axP, 'FontSize', 14)
-subplot(411), plot((k*Ts),xref)
+subplot(411), plot((kr*Ts),xrefr)
 title('input $u_e$ and states responses in time domain', 'FontSize', 14, 'Interpreter','Latex')
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$u_e$', 'FontSize', 14, 'Interpreter','Latex')
-subplot(412), plot((k*Ts),xs(:,1)); hold on; plot((k*Ts),xref)
+subplot(412), plot((kr*Ts),xsr(:,1)); hold on; plot((kr*Ts),xrefr)
 l = legend('state $x$', '$x_{ref}$');
 set(l, 'Interpreter','Latex');
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$x$ [m]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(413), plot((k*Ts),xs(:,2))
+subplot(413), plot((kr*Ts),xsr(:,2))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$\dot{x}$ [m/s]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(414), plot((k*Ts),xs(:,3))
+subplot(414), plot((kr*Ts),xsr(:,3))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
 
@@ -415,46 +426,49 @@ xref_c = Ax*sin(2*pi*fc*t);
 Noise10 = 0*t;
 Noise20 = 0*t;
 [ts,xs,ys] = sim('modelP16',TIME_SIM,[],[t' xref_c'], [t' Noise10'], [t' Noise20']);
+xref_cr = xref_c(1/STEP_SIZE:length(t));   
+xsr = xs(1/STEP_SIZE:length(t),:);
 
 %time domain
 figure
 grid on, axP = axes; set(axP, 'FontSize', 14)
-subplot(411), plot(t,xref_c)
+subplot(411), plot(tr,xref_cr)
 title('input $u_e$ and states responses in time domain', 'FontSize', 14, 'Interpreter','Latex')
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$u_e$', 'FontSize', 14, 'Interpreter','Latex')
-subplot(412), plot(t,xs(:,1)); hold on; plot(t,xref_c);
+subplot(412), plot(tr,xsr(:,1)); hold on; plot(tr,xref_cr);
 l = legend('state $x$', '$x_{ref}$');
 set(l, 'Interpreter','Latex');
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$x$ [m]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(413), plot(t,xs(:,2))
+subplot(413), plot(tr,xsr(:,2))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$\dot{x}$ [m/s]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(414), plot(t,xs(:,3))
+subplot(414), plot(tr,xsr(:,3))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
 
 %non zero noise
 
 [ts,xs,ys] = sim('modelP16',TIME_SIM,[],[t' xref_c'], [t' Noise1'], [t' Noise2']);
+xsr = xs(1/STEP_SIZE:length(t),:);
 
 %time domain
 figure
 grid on, axP = axes; set(axP, 'FontSize', 14)
-subplot(411), plot(t,xref_c)
+subplot(411), plot(tr,xref_cr)
 title('input $u_e$ and states responses in time domain', 'FontSize', 14, 'Interpreter','Latex')
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$u_e$', 'FontSize', 14, 'Interpreter','Latex')
-subplot(412), plot(t,xs(:,1)); hold on; plot(t,xref_c);
+subplot(412), plot(tr,xsr(:,1)); hold on; plot(tr,xref_cr);
 l = legend('state $x$', '$x_{ref}$');
 set(l, 'Interpreter','Latex');
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$x$ [m]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(413), plot(t,xs(:,2))
+subplot(413), plot(tr,xsr(:,2))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$\dot{x}$ [m/s]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(414), plot(t,xs(:,3))
+subplot(414), plot(tr,xsr(:,3))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
 
