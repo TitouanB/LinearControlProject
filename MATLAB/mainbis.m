@@ -236,11 +236,12 @@ xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$P_i$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
 
 %% PB10
+C=[0 0 1];
 sys=ss(A,B,C,[0]);
 w = [2:2:6]*pi*fc;
 [MAG,PHASE] = bode(sys,w);
 MAGp10=[MAG(1) MAG(2) MAG(3)];
-NoiseAmp = Amplitude(3,1:3)./MAGp10;
+NoiseAmp = Amplitudep4(3,1:3)./MAGp10;
 
 Noise1 = NoiseAmp(2)*sin(4*pi*fc*t);
 Noise2 = NoiseAmp(3)*sin(6*pi*fc*t);
@@ -286,15 +287,21 @@ title('Periodogram Using FFT')
 axis([-1 100 -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('PSD of $u_e$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(412), plot(fp10(:,1),Pxxp10_db(:,1))
+subplot(412), plot(fp10(:,1),Pxxp10_db(:,1)); hold on; plot(fp3(:,1),Pxxp3_db(:,1));
+l = legend('linear model', 'nonlinear model');
+set(l, 'Interpreter','Latex');
 axis([-1 100 -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('PSD of $x$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(413), plot(fp10(:,2),Pxxp10_db(:,2))
+subplot(413), plot(fp10(:,2),Pxxp10_db(:,2)); hold on; plot(fp3(:,2),Pxxp3_db(:,2));
+l = legend('linear model', 'nonlinear model');
+set(l, 'Interpreter','Latex');
 axis([-1 100 -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('PSD of $\dot{x}$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(414), plot(fp10(:,3),Pxxp10_db(:,3))
+subplot(414), plot(fp10(:,3),Pxxp10_db(:,3)); hold on; plot(fp3(:,3),Pxxp3_db(:,3));
+l = legend('linear model', 'nonlinear model');
+set(l, 'Interpreter','Latex');
 axis([-1 100 -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('PSD of $i$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
@@ -476,7 +483,7 @@ ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
 xref_c = Ax*sin(2*pi*fc*t);
 Au_needed = Ax*N; %should be <40V according to paper
 
-[ts,xsp17,ys] = sim('modelP16',TIME_SIM,[],[t' xref_c'], [t' Noise1'], [t' Noise2']);
+[ts,xsp17,ys] = sim('modelP17',TIME_SIM,[],[t' xref_c']);
 xsrp17 = xsp17(1/STEP_SIZE:length(t),:);
 xref_cr = xref_c(1/STEP_SIZE:length(t));  
 
@@ -518,15 +525,21 @@ title('Periodogram Using FFT')
 axis([-1 100 -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('PSD of $u_e$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(412), plot(fp17(:,1),Pxxp17_db(:,1))
+subplot(412), plot(fp17(:,1),Pxxp17_db(:,1)); hold on; plot(fp3(:,1),Pxxp3_db(:,1));
+l = legend('linear model', 'nonlinear model');
+set(l, 'Interpreter','Latex');
 axis([-1 100 -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('PSD of $x$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(413), plot(fp17(:,2),Pxxp17_db(:,2))
+subplot(413), plot(fp17(:,2),Pxxp17_db(:,2)); hold on; plot(fp3(:,2),Pxxp3_db(:,2));
+l = legend('linear model', 'nonlinear model');
+set(l, 'Interpreter','Latex');
 axis([-1 100 -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('PSD of $\dot{x}$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(414), plot(fp17(:,3),Pxxp17_db(:,3))
+subplot(414), plot(fp17(:,3),Pxxp17_db(:,3)); hold on; plot(fp3(:,3),Pxxp3_db(:,3));
+l = legend('linear model', 'nonlinear model');
+set(l, 'Interpreter','Latex');
 axis([-1 100 -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('PSD of $i$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
@@ -544,6 +557,18 @@ d2_control = Amplitudep17(2,2)/sqrt(Amplitudep17(2,1)^2+Amplitudep17(2,2)^2)*100
 d3_control = Amplitudep17(2,3)/sqrt(Amplitudep17(2,1)^2+Amplitudep17(2,3)^2)*100;
 
 %% Pb 18
+
+
+%% Pb 19
+C=[0 0 1];
+
+
+
+
+
+
+
+
 
 
 
