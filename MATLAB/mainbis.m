@@ -619,13 +619,31 @@ d3_control = Amplitudep17(2,3)/sqrt(Amplitudep17(2,1)^2+Amplitudep17(2,3)^2)*100
 
 
 %% Pb 19
-C=[0 0 1];
+C_p19=[0 0 1];
+
+%TODO
+Axw = zeros(3,4);
+Aw = zeros(4,4);
 
 
+%should be ok
+Ak_p19 = [A Axw;
+    zeros(4,3) Aw];
+Bk_p19 = [B;0;0;0;0];
+Ck_p19 = [C_p19 0 0 0 0];
 
 
+Mo_p19 = [Ck_p19
+    Ck_p19*Ak_p19
+    Ck_p19*Ak_p19^2
+    Ck_p19*Ak_p19^3
+    Ck_p19*Ak_p19^4
+    Ck_p19*Ak_p19^5
+    Ck_p19*Ak_p19^6];
+rank(Mo_p19); % != 7 but observable
 
 
+%% Pb 20
 
 
 
