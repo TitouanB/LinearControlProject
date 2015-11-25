@@ -21,7 +21,7 @@ t=0:STEP_SIZE:TIME_SIM;
 
 % P3
 Au = 5; % V
-fc = 20; % Hz
+fc = 200; % Hz
 ue = Au*sin(2*pi*fc*t);
 
 [tsp3,xsp3,ys] = sim('modelP3',TIME_SIM,[],[t' ue']);
@@ -106,11 +106,12 @@ THDMatlab = thd(xsrp3(:,2), Fs, NumberHarmonic);
 % for k=1:length(AuPb5)
 %     for l=1:length(fcPb5)
 %         uePb5 = AuPb5(k)*sin(2*pi*fcPb5(l)*t);
-%         [tsPb5,xsPb5,ysPb5] = sim('nonLinearModel2',TIME_SIM,[],[t' uePb5']);
+%         [tsPb5,xsPb5,ysPb5] = sim('modelP3',TIME_SIM,[],[t' uePb5']);
+%         xsrPb5 = xsPb5(1/STEP_SIZE:length(t),:);
 %         AmplitudePb5=[];
 %         for j=1:3
 %             for i=1:3
-%                AmplitudePb5(j,i)=amplitude(xsPb5(:,j), TIME_SIM, fcPb5(l)*i);
+%                AmplitudePb5(j,i)=amplituder(xsrPb5(:,j), TIME_SIM, fcPb5(l)*i);
 %             end
 %         end
 %         d2Pb5(k,l) = AmplitudePb5(2,2)/sqrt(AmplitudePb5(2,1)^2+AmplitudePb5(2,2)^2)*100;
@@ -384,25 +385,35 @@ rank(Mc); % = 3, controllable
 
 %% Pb15
 C=[1 0 0];
-%continous
-Pconti= [-4000, -1200-1000i, -1200+1000i];%[-2000, -1200-1000i, -1200+1000i]; %[-900, -700-400i, -700+400i];
-Kcon=acker(A,B,Pconti);
-Ak=A-B*Kcon;
-sys=ss(A,B,C,[]);
-sys_k=ss(Ak,B,C,[]);
-w = 2*pi*fc;
-figure;
-bode(sys_k, [0:0.1:10000]);
-[MAG2,PHASE] = bode(sys,w);
-Pdisc = exp(Pconti*Ts);
+%continous to discrete
+% Pconti= [-4000, -1200-1000i, -1200+1000i];%[-2000, -1200-1000i, -1200+1000i]; %[-900, -700-400i, -700+400i];
+% Kcon=acker(A,B,Pconti);
+% Ak=A-B*Kcon;
+% sys=ss(A,B,C,[]);
+% sys_k=ss(Ak,B,C,[]);
+% w = 2*pi*fc;
+% figure;
+% bode(sys_k, [0:0.1:10000]);
+% [MAG2,PHASE] = bode(sys,w);
+% Pdisc = exp(Pconti*Ts);
+% 
+% K=acker(F,G,Pdisc);
+% Fk=F-G*K;
+% sys_d=ss(F,G,C,[]);
 
+% discrete
+[z p kss] = ss2zp(F,G,C,0);
+%Pdisc = [p(1)*0.9 p(2)*0.9 p(3)*0.9];
+Pdisc = [0.6703 + 0.0000i, 0.8825 - 0.0885i, 0.8825 + 0.0885i];
 K=acker(F,G,Pdisc);
 Fk=F-G*K;
-sys_d=ss(F,G,C,[]);
+sys_kd=ss(Fk,G,C,0,Ts);
+bode(sys_kd);
 
 %%
 Ax=0.0008; %[m]
-N=inv(C*inv(-Ak)*B);
+%N=inv(C*inv(-Ak)*B);
+N = inv(C*inv(eye(3)-Fk)*G);
 %Av=Ax*N; %8.3749; %Ax/MAG2;
 xref=Ax*sin(2*pi*fc*k*Ts);
 [ts,xsp15,ys] = sim('modelP15',TIME_SIM,[],[(k*Ts)' xref'], [(k*Ts)' Noise1d'], [(k*Ts)' Noise2d']);
@@ -557,6 +568,54 @@ d2_control = Amplitudep17(2,2)/sqrt(Amplitudep17(2,1)^2+Amplitudep17(2,2)^2)*100
 d3_control = Amplitudep17(2,3)/sqrt(Amplitudep17(2,1)^2+Amplitudep17(2,3)^2)*100;
 
 %% Pb 18
+% AxPb18 = 0.0005:0.00025:0.001; % m
+% fcPb18 = 20:5:200; % Hz
+% d2Pb18 = zeros(length(AxPb18),length(fcPb18));
+% d3Pb18 = zeros(length(AxPb18),length(fcPb18));
+% 
+% for k=1:length(AxPb18)
+%     for l=1:length(fcPb18)
+%         xrefPb18 = AxPb18(k)*sin(2*pi*fcPb18(l)*t);
+%         [tsPb18,xsPb18,ysPb18] = sim('modelP17',TIME_SIM,[],[t' xrefPb18']);
+%         xsrPb18 = xsPb18(1/STEP_SIZE:length(t),:); 
+%         
+%         AmplitudePb18=[];
+%         for j=1:3
+%             for i=1:3
+%                AmplitudePb18(j,i)=amplituder(xsrPb18(:,j), TIME_SIM, fcPb18(l)*i);
+%             end
+%         end
+%         d2Pb18(k,l) = AmplitudePb18(2,2)/sqrt(AmplitudePb18(2,1)^2+AmplitudePb18(2,2)^2)*100;
+%         d3Pb18(k,l) = AmplitudePb18(2,3)/sqrt(AmplitudePb18(2,1)^2+AmplitudePb18(2,3)^2)*100;
+%     end
+% end
+% 
+% figure
+% grid on, axP = axes; set(axP, 'FontSize', 14)
+% subplot(311)
+% plot(fcPb18, d2Pb18(1,:))
+% hold on
+% plot(fcPb18, d3Pb18(1,:))
+% xlabel('Frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
+% ylabel('$A_x = 0.0005$ m', 'FontSize', 14, 'Interpreter','Latex')
+% l=legend('$d_2 [\%]$','$d_3 [\%]$');
+% set(l, 'FontSize',14, 'Interpreter','Latex')
+% subplot(312)
+% plot(fcPb18, d2Pb18(2,:))
+% hold on
+% plot(fcPb18, d3Pb18(2,:))
+% xlabel('Frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
+% ylabel('$A_x = 0.00075$ m', 'FontSize', 14, 'Interpreter','Latex')
+% l=legend('$d_2 [\%]$','$d_3 [\%]$');
+% set(l, 'FontSize',14, 'Interpreter','Latex')
+% subplot(313)
+% plot(fcPb18, d2Pb18(3,:))
+% hold on
+% plot(fcPb18, d3Pb18(3,:))
+% xlabel('Frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
+% ylabel('$A_x = 0.001$ m', 'FontSize', 14, 'Interpreter','Latex')
+% l=legend('$d_2 [\%]$','$d_3 [\%]$');
+% set(l, 'FontSize',14, 'interpreter','Latex')
 
 
 %% Pb 19
