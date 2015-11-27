@@ -427,7 +427,7 @@ subplot(411), plot((kr*Ts),xrefr)
 title('input $u_e$ and states responses in time domain', 'FontSize', 14, 'Interpreter','Latex')
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$u_e$', 'FontSize', 14, 'Interpreter','Latex')
-subplot(412), plot((kr*Ts),xsrp15(:,1)); hold on; plot((kr*Ts),xrefr,'r')
+subplot(412), plot((kr*Ts),xsrp15(:,1)); hold on; plot((kr*Ts),xrefr)
 l = legend('state $x$', '$x_{ref}$');
 set(l, 'Interpreter','Latex');
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
@@ -519,7 +519,7 @@ subplot(411), plot(tr,xref_cr)
 title('input $u_e$ and states responses in time domain', 'FontSize', 14, 'Interpreter','Latex')
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$u_e$', 'FontSize', 14, 'Interpreter','Latex')
-subplot(412), plot(tr,xsrp17(:,1)); hold on; plot(tr,xref_cr,'r');
+subplot(412), plot(tr,xsrp17(:,1)); hold on; plot(tr,xref_cr);
 l = legend('state $x$', '$x_{ref}$');
 set(l, 'Interpreter','Latex');
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
@@ -663,11 +663,12 @@ C_p19=[0 0 1];
 %     Ck_p19*Ak_p19^6];
 % rank(Mo_p19); % != 7 but observable
 
+syms s var;
 w40 = 2*pi*2*fc;
-[num40, den40] = numden(laplace(sin(w40*t),s));
+[num40, den40] = numden(laplace(sin(w40*var),s));
 [Aw40 Bw40 Cw40 Dw40] = tf2ss(sym2poly(num40),sym2poly(den40));
 w60 = 2*pi*3*fc;
-[num60, den60] = numden(laplace(sin(w60*t),s));
+[num60, den60] = numden(laplace(sin(w60*var),s));
 [Aw60 Bw60 Cw60 Dw60] = tf2ss(sym2poly(num60),sym2poly(den60));
 Aw = [Aw40 zeros(2,2)
     zeros(2,2) Aw60];
@@ -680,10 +681,30 @@ CkP19 = [C_p19 0 0 0 0];
 Bkn = [zeros(3,6);
     zeros(4,2) eye(4)];
 
+% observability
+MoP19 = [CkP19
+    CkP19*AkP19
+    CkP19*AkP19^2
+    CkP19*AkP19^3
+    CkP19*AkP19^4
+    CkP19*AkP19^5
+    CkP19*AkP19^6];
+rank(MoP19); % 5 != 7
+
 %% Pb 20
 
+sigmai = 0.1; % A
+sigmav = 0.05; % m/s
+sigman2 = 0.001; % A
 
+% sigma 2 = ajouter white noise a la sortie du syst = easy
 
+% nx:
+% cf solution GW15
+% xa = [xP19
+%        nx]
+% with nxdot = -beta*nx+sqrt(2*beta)*[sigmai; sigmav]*whitenoise
+% whitenoise ???
 
 
 
