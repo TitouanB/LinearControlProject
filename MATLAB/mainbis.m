@@ -21,7 +21,7 @@ t=0:STEP_SIZE:TIME_SIM;
 
 % P3
 Au = 5; % V
-fc = 200; % Hz
+fc = 20; % Hz
 ue = Au*sin(2*pi*fc*t);
 
 [tsp3,xsp3,ys] = sim('modelP3',TIME_SIM,[],[t' ue']);
@@ -427,7 +427,7 @@ subplot(411), plot((kr*Ts),xrefr)
 title('input $u_e$ and states responses in time domain', 'FontSize', 14, 'Interpreter','Latex')
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$u_e$', 'FontSize', 14, 'Interpreter','Latex')
-subplot(412), plot((kr*Ts),xsrp15(:,1)); hold on; plot((kr*Ts),xrefr)
+subplot(412), plot((kr*Ts),xsrp15(:,1)); hold on; plot((kr*Ts),xrefr,'r')
 l = legend('state $x$', '$x_{ref}$');
 set(l, 'Interpreter','Latex');
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
@@ -438,6 +438,14 @@ ylabel('$\dot{x}$ [m/s]', 'FontSize', 14, 'Interpreter','Latex')
 subplot(414), plot((kr*Ts),xsrp15(:,3))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
+
+figure;
+grid on, axP = axes; set(axP, 'FontSize', 14)
+subplot(411), plot(k*Ts,ucontP15.Data)
+title('control input $u_e$', 'FontSize', 14, 'Interpreter','Latex')
+xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$u_e$', 'FontSize', 14, 'Interpreter','Latex')
+
 
 %% Pb16
 xref_c = Ax*sin(2*pi*fc*t);
@@ -490,9 +498,15 @@ subplot(414), plot(tr,xsrp16(:,3))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
 
+figure;
+grid on, axP = axes; set(axP, 'FontSize', 14)
+subplot(411), plot(t,ucontP16.Data)
+title('control input $u_e$', 'FontSize', 14, 'Interpreter','Latex')
+xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$u_e$', 'FontSize', 14, 'Interpreter','Latex')
+
 %% P17
 xref_c = Ax*sin(2*pi*fc*t);
-Au_needed = Ax*N; %should be <40V according to paper
 
 [ts,xsp17,ys] = sim('modelP17',TIME_SIM,[],[t' xref_c']);
 xsrp17 = xsp17(1/STEP_SIZE:length(t),:);
@@ -505,7 +519,7 @@ subplot(411), plot(tr,xref_cr)
 title('input $u_e$ and states responses in time domain', 'FontSize', 14, 'Interpreter','Latex')
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$u_e$', 'FontSize', 14, 'Interpreter','Latex')
-subplot(412), plot(tr,xsrp17(:,1)); hold on; plot(tr,xref_cr);
+subplot(412), plot(tr,xsrp17(:,1)); hold on; plot(tr,xref_cr,'r');
 l = legend('state $x$', '$x_{ref}$');
 set(l, 'Interpreter','Latex');
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
@@ -516,6 +530,13 @@ ylabel('$\dot{x}$ [m/s]', 'FontSize', 14, 'Interpreter','Latex')
 subplot(414), plot(tr,xsrp17(:,3))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
+
+figure;
+grid on, axP = axes; set(axP, 'FontSize', 14)
+subplot(411), plot(t,ucontP17.Data)
+title('control input $u_e$', 'FontSize', 14, 'Interpreter','Latex')
+xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$u_e$', 'FontSize', 14, 'Interpreter','Latex')
 
 %freq domain
 Pxxp17=[];
@@ -622,26 +643,42 @@ d3_control = Amplitudep17(2,3)/sqrt(Amplitudep17(2,1)^2+Amplitudep17(2,3)^2)*100
 C_p19=[0 0 1];
 
 %TODO
-Axw = zeros(3,4);
-Aw = zeros(4,4);
+% Axw = zeros(3,4);
+% Aw = zeros(4,4);
+% 
+% 
+% %should be ok
+% Ak_p19 = [A Axw;
+%     zeros(4,3) Aw];
+% Bk_p19 = [B;0;0;0;0];
+% Ck_p19 = [C_p19 0 0 0 0];
+% 
+% 
+% Mo_p19 = [Ck_p19
+%     Ck_p19*Ak_p19
+%     Ck_p19*Ak_p19^2
+%     Ck_p19*Ak_p19^3
+%     Ck_p19*Ak_p19^4
+%     Ck_p19*Ak_p19^5
+%     Ck_p19*Ak_p19^6];
+% rank(Mo_p19); % != 7 but observable
 
-
-%should be ok
-Ak_p19 = [A Axw;
+w40 = 2*pi*2*fc;
+[num40, den40] = numden(laplace(sin(w40*t),s));
+[Aw40 Bw40 Cw40 Dw40] = tf2ss(sym2poly(num40),sym2poly(den40));
+w60 = 2*pi*3*fc;
+[num60, den60] = numden(laplace(sin(w60*t),s));
+[Aw60 Bw60 Cw60 Dw60] = tf2ss(sym2poly(num60),sym2poly(den60));
+Aw = [Aw40 zeros(2,2)
+    zeros(2,2) Aw60];
+Axw = [Bd(:,1)*Cw40 Bd(:,2)*Cw40];
+AkP19 = [A Axw;
     zeros(4,3) Aw];
-Bk_p19 = [B;0;0;0;0];
-Ck_p19 = [C_p19 0 0 0 0];
-
-
-Mo_p19 = [Ck_p19
-    Ck_p19*Ak_p19
-    Ck_p19*Ak_p19^2
-    Ck_p19*Ak_p19^3
-    Ck_p19*Ak_p19^4
-    Ck_p19*Ak_p19^5
-    Ck_p19*Ak_p19^6];
-rank(Mo_p19); % != 7 but observable
-
+lambdaAw = eig(Aw);
+BkP19 = [B;zeros(4,1)];
+CkP19 = [C_p19 0 0 0 0];
+Bkn = [zeros(3,6);
+    zeros(4,2) eye(4)];
 
 %% Pb 20
 
