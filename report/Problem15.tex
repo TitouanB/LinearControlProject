@@ -1,0 +1,34 @@
+To design the feedback controller $u_e(k) = \kappa (\text{x}(k),x_{ref}(k))$, we want to choose the closed loop eigenvalues by means of the \textit{Arbitrary Eigenvalue Assignment}. 
+According to the control requirement, the frequency band is [20,\ 200] Hz. The eigenvalues were then selected to have a sharp control between these bounds. To do so, the natural frequency $w_n$ was chosen to be more than $2\pi \cdot 200 = 1.26 \cdot 10^3 \ rad/sec$. We also wanted a good damping ratio, around 0.7 as well as a fast time constant. Finally the eigenvalues need to have a negative real part to get a stable system. These criteria were fulfilled for the following eigenvalues, converted in discrete time thanks to the formula $\lambda_F = e^{\lambda_A Ts}$:
+
+\begin{equation*}
+\lambda_{Fdesired} =  \begin{pmatrix}
+0.6703\\
+0.8825 - 0.0885i\\
+0.8825 + 0.0885i
+\end{pmatrix}
+\end{equation*}
+
+As it is explained in P14, the controller to be implemented is a reference feedforward. We have $u_e(k) = -K\text{x}(k) + Nx_{ref}(k)$, where $K$ and $N$ are gains that we need to determine.
+The feedback gain K is computed thanks to the Ackermann's formula in Matlab $K = acker(F,G,\lambda_{Fdesired})$ and we obtain our new system with $F_k = F-GK$. The good placement of the eigenvalues is checked thanks to the \textit{eig} function. The bode diagram is also plotted (figure \ref{fig:bodeLambda}) and it can be verified that the gain is constant for the frequency band desired from 20 to 200 Hz i.e. from $126$ rad/sec to $1.26 \cdot 10^3$ rad/sec. At 200 Hz, the gain is slowly decreasing but in order to have a control input in the range -40 and 40 V, we have to find a trade-off and it was chosen not to track perfectly the reference for 200 Hz instead of having a saturated input.
+
+\begin{figure}[H]
+ \centering 
+ \includegraphics[trim=2cm 7cm 2cm 7cm, clip=true, totalheight=0.35\textheight, angle=0]{figures/P15bodeLambda.pdf}
+ \caption{Bode Diagram of the Discrete Time System with Feedback Controller}
+ \label{fig:bodeLambda}
+\end{figure}
+
+Once this step achieved, we compute $N$ \eqref{gainN} through the DC gain of the closed-loop system \eqref{DCgain}:
+\begin{align}
+\kappa &= C(I-F_k)^{-1}G \label{DCgain} \\
+N &= \kappa^{-1} \label{gainN}
+\end{align}
+
+After implementing the controller in Simulink (see Appendix \ref{AppDiscreteTimeP15}), the simulation was run. It can be noticed on figure \ref{fig:P15xref} that the voice coil position matches well the reference $x_{ref}$ with a time delay $\tau = 4 \ ms$.
+\begin{figure}[H]
+ \centering 
+ \includegraphics[trim=2cm 17cm 2cm 7cm, clip=true, totalheight=0.12\textheight, angle=0]{figures/P15xref.pdf}
+ \caption{Simulation of the Discrete Time Linear Model with the Position Reference Tracking}
+ \label{fig:P15xref}
+\end{figure}
