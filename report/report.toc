@@ -15,7 +15,14 @@
 \contentsline {subsubsection}{Problem 8}{9}{section*.14}
 \contentsline {subsubsection}{Problem 9}{10}{section*.15}
 \contentsline {subsection}{\numberline {1.1.4}Harmonic distortion and fictitious disturbances}{11}{subsection.1.1.4}
-\contentsline {subsubsection}{Problem 10}{12}{section*.19}
-\contentsline {subsubsection}{Problem 11}{12}{section*.20}
+\contentsline {subsubsection}{Problem 10}{12}{section*.18}
+\contentsline {subsubsection}{Problem 11}{12}{section*.19}
 \contentsline {subsection}{\numberline {1.1.5}System discretization}{14}{subsection.1.1.5}
-\contentsline {subsubsection}{Problem 12}{14}{section*.24}
+\contentsline {subsubsection}{Problem 12}{14}{section*.22}
+\contentsline {subsubsection}{Problem 13}{14}{section*.23}
+\contentsline {subsubsection}{Problem 16}{14}{section*.24}
+\contentsline {subsubsection}{Problem 17}{16}{section*.27}
+\contentsline {chapter}{\numberline {A}SIMULINK Model of the Linear System}{18}{appendix.A}
+\contentsline {chapter}{\numberline {B}SIMULINK Model of the Linear System with Disturbance}{19}{appendix.B}
+\contentsline {chapter}{\numberline {C}SIMULINK Model of the Continuous Time Linear System with the Discrete Time Feedback}{20}{appendix.C}
+\contentsline {chapter}{\numberline {D}SIMULINK Model of the Nonlinear Model with the Discrete Time Feedback}{21}{appendix.D}

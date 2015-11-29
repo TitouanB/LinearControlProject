@@ -31,7 +31,8 @@ We can notice that
 	Re(\lambda_i)<0, \ i=1,2,3
 \end{equation}
 
-which means that the system is asymptotically stable. Moreover, the eigenmodes of the system are $e^{\lambda_1t}$, $e^{\lambda_2t}$ and $e^{\lambda_3t}$. We can notice that \begin{equation*}
-\frac{1}{\lambda_1}=\tau_1>\tau_2, \tau_3
+which means that the system is asymptotically stable. Moreover, using Euler decomposition, the eigenmodes of the system are $e^{\lambda_1t}$, $e^{\Re(\lambda_2)t}\left(\cos(\Im(\lambda_2)t)+\sin(\Im(\lambda_2)t)\right)$ and $e^{\Re(\lambda_3)t}\left(\cos(\Im(\lambda_3)t)-\sin\Im(\lambda_3)t)\right)$. We can notice that \begin{equation*}
+\frac{1}{\lambda_1}=\tau_1>\tau_2, \tau_3, \qquad with\ \tau_i = \frac{1}{\sqrt{\Re(\lambda_i)^2+\Im(\lambda_i)^2}}, \qquad i = 2, 3
 \end{equation*}
-which means that the response of the state $x$ to an input $u_e$ will be slower than the one of $i$ and $\dot{x}$. We can also see that as $\lambda_2$ and $\lambda_3$ have an imaginary part which means that $\dot{x}$ and $i$ will have an oscillatory response.
+which means that the response of the state $x$ to an input $u_e$ will be slower than the one of $i$ and $\dot{x}$. We can also see that as $\lambda_2$ and $\lambda_3$ have an imaginary part which means that the eigenmodes associated to $\lambda_2$ and $\lambda_3$ will have an oscillatory behavior.
+%$\dot{x}$ and $i$ will have an oscillatory response.

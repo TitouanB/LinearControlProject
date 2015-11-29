@@ -1,27 +1,18 @@
-The disturbance is now added to our SIMULINK model (see figure \ref{fig:linearModelNoise}).
+The disturbance is now added to our SIMULINK model (see figure \ref{fig:linearModelNoise}). The response to the input can be seen figure \ref{fig:responseNoiset} and the PSD figure \ref{fig:responseNoisef}.
 
 \begin{figure}[H]
  \centering 
- \includegraphics[trim=5cm 5cm 2cm 5cm, clip=true, totalheight=0.35\textheight, angle=0]{figures/linearModelNoise.pdf}
- \caption{SIMULINK model of the linearised loudspeaker with noise}
-\label{fig:linearModelNoise}
-\end{figure}
-
-The response to the input can be seen figure \ref{fig:responseNoiset} and the PSD figure \ref{fig:responseNoisef}.
-
-\begin{figure}[H]
- \centering 
- \includegraphics[trim=2cm 7cm 2cm 7cm, clip=true, totalheight=0.35\textheight, angle=0]{figures/responseNoiset.pdf}
- \caption{$u_e$ and states response to the input $u_e$ using the linearised model extended with disturbances}
+ \includegraphics[trim=2cm 7cm 2cm 7cm, clip=true, totalheight=0.35\textheight, angle=0]{figures/p11time.pdf}
+ \caption{response of the states to the input $u_e$ using the linearised model extended with disturbances and the nonlinear model}
  \label{fig:responseNoiset}
 \end{figure}
 
 \begin{figure}[H]
  \centering 
- \includegraphics[trim=2cm 7cm 2cm 7cm, clip=true, totalheight=0.35\textheight, angle=0]{figures/responseNoisef.pdf}
- \caption{PSD of $u_e$ and states using the linearised model extended with disturbances}
+ \includegraphics[trim=2cm 7cm 2cm 7cm, clip=true, totalheight=0.35\textheight, angle=0]{figures/p11freq.pdf}
+ \caption{PSD of the states using the linearised model extended with disturbances and the nonlinear model}
  \label{fig:responseNoisef}
 \end{figure}
 
-We can see that the output of the new model permits to have the harmonic distortion at $f = 40$ and $60$ $Hz$ desired. However, we can notice that there is a difference of 2 $db$ for the third harmonic on the PSD figure \ref{fig:responseNoisef}. Therefore, we will reduce 'manually' the magnitude $A_{i2}$ to 0.075 $V$ in order to delete this error and improve the model.
+We can see on both figures (\ref{fig:responseNoiset} and \ref{fig:responseNoisef}) that the responses are almost exactly the same (the plot of the response of the nonlinear model is over the one of the linear model). As expected, the two harmonic distortions of $40$ and $60$ $Hz$ are present with the right magnitude. The next distortions are of course missing. Also, the magnitude of the harmonics of state $i$ are almost perfect, but not the ones of the other states which is normal because the disturbance is designed for $i$.
 
