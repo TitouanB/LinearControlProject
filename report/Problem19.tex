@@ -1,0 +1,78 @@
+To attenuate the distortion around the second and third order harmonics, an observer will be implemented in the linear system to approximate the fictitious disturbances and deduce the behaviour of the non linear system.
+We still have $y(t) = i(t)$ and the model described below is considered:
+\begin{align*}
+\dot{\text{x}} &= A\text{x} + Bu_e + B_d d \\
+y &= C \text{x}
+\end{align*}
+where $C = [0 \ 0 \ 1]$.
+The voice coil position reference $x_{ref}(k) = A_x sin(2\pi f_c kT_s)$ with $A_x = 0.001$ m and $f_c = 20$ Hz is given. 
+
+\subsection*{Problem 19}
+\addcontentsline{toc}{subsubsection}{Problem 19}
+
+In order to recreate the fictitious disturbances and the unmeasured states, the model is expanded with 4 new states. The new model is:
+\begin{align*}
+\dot{\text{x}}_k &= A_k \text{x}_k + B_k u_e + B_{kn} n_1 \\
+y &= C_k \text{x}_k + n_2
+\end{align*}
+where $A_k$, $B_k$, $B_{kn}$ and $C_k$ need to be determined.
+To do so, the dynamics of the disturbance $d$ is designed with a new system such as:
+\begin{align*}
+\dot{\text{w}} &= A_w\text{w} \\
+d &= C_w \text{w}
+\end{align*}
+Where $Re(\lambda (A_w)) = 0$. This means that the eigenvalues of each disturbance should be on the imaginary axes and be conjugate pairs. As a reminder, we also have:
+\[
+  d = \begin{pmatrix}
+   sin(4\pi f_c t)\\
+   sin(6\pi f_c t)
+\end{pmatrix}
+\]
+The disturbance $d$ is composed of two sinusoidal signals (sinus). In Laplace domain, their poles will be on the imaginary axes, at $\pm j\omega$ where $\omega = 4\pi f_c$ for $d_1$ and $\omega = 6\pi f_c$ for $d_2$, which is desired. 
+The transfert functions corresponding to each disturbance using the Matlab \textit{laplace} function are calculated:
+\begin{align*}
+H_1(s) &= \frac{80\pi}{s^2 + 6400\pi^2}\\
+H_2(s) &= \frac{120\pi}{s^2 + 14400\pi^2}
+\end{align*}
+Then we use \textit{tf2ss} to have the two subsystems ($A_{w_1}$, $B_{w_1}$, $C_{w_1}$ and $D_{w_1}$ and $A_{w_2}$, $B_{w_2}$, $C_{w_2}$ and $D_{w_2}$) corresponding to each transfert function. $A_w$ and $A_{xw} = B_d C_w$ are deduced by combining the two subsystems:
+\begin{equation*}
+  A_w = \begin{pmatrix}
+   0 & -6.3165 \cdot 10^4 & 0 & 0\\
+   1 & 0 & 0 & 0\\
+   0 & 0 & 0 & -1.4212 \cdot 10^5\\
+   0 & 0 & 1 & 0
+\end{pmatrix}
+\qquad A_{xw} = \begin{pmatrix}
+	0 & 0 & 0 & 0\\
+	0 & 0 & 0 & 0\\
+	0 & 4.4483 \cdot 10^4 & 0 & 6.6724 \cdot 10^4
+\end{pmatrix}
+\end{equation*}
+
+And finally:
+\begin{equation*}
+  A_k = \begin{pmatrix}
+   A & A_{xw}\\
+   0 & A_w
+\end{pmatrix}
+\qquad B_{k} = \begin{pmatrix}
+	B\\
+	0
+\end{pmatrix}
+\qquad C_{k} = \begin{pmatrix}
+	C & 0
+\end{pmatrix}
+\end{equation*}
+
+From the assumption that the process noise $n_x$ enters the system in the feedback path of the open loop system, it can be concluded that $B_{kn}$ does not take into account $n_x$. Then we have:
+\begin{equation*}
+B_{kn} = \begin{pmatrix}
+	0 & 0 & 0 & 0 & 0 & 0\\
+	0 & 0 & 0 & 0 & 0 & 0\\
+	0 & 0 & 0 & 0 & 0 & 0\\
+	0 & 0 & 1 & 0 & 0 & 0\\
+	0 & 0 & 0 & 1 & 0 & 0\\
+	0 & 0 & 0 & 0 & 1 & 0\\
+	0 & 0 & 0 & 0 & 0 & 1
+\end{pmatrix}
+\end{equation*}

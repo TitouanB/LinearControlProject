@@ -1,0 +1,6 @@
+We would like to reduce the distortion effects by implementing a reference tracking controller for the voice coil position. In order to do so, we consider the same linear model with fictitious disturbances than in P10 and we assume that the state is fully accessible to the measurement. The voice coil position reference $x_{ref}(k) = A_x sin(2\pi f_c k T_s)$ is given with $A_x \ \in \ [0.0005,\ 0.001]$ m and $f_c \in \ [20,\ 200]$ Hz.
+
+\subsection*{Problem 14}
+\addcontentsline{toc}{subsubsection}{Problem 14}
+
+The controllability of the system is evaluated numerically by computing the controllability matrix $M_c = [F \ FG \ F^2G]$. The rank of the matrix is equal to 3, which means that the system is controllable: it is possible to achieve the position reference tracking. As the reference signal should not be related to the input signal but directly to the voice coil position, and as it is assumed that the state is measurable, it is proposed to implement a Reference Feedforward Controller. We only want to control $x$, so the number of control input is equal to the number of controlled output, one in this case. 

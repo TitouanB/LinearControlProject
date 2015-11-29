@@ -1,19 +1,19 @@
 The input voltage is set to $u_e = A_u sin(2\pi f_c t)$, where $A_u = 5 \ V$ and $f_c = 20 \ Hz$.
-Then the nonlinear system implemented in PB2 is simulated to get the states responses. To visualise the signals in the frequency domain, we used the \textit{$power\_spectral\_density$} function given in the assignment \cite{assign} with $F_s = \frac{1}{TIME\_SIM} = 10 \ kHz$. The function output gives the power spectral density $P_{xx}$ in [$Amplitude^2$/Hz]. In order to convert it in [dB/Hz], we use: 
+Then the nonlinear system implemented in P2 is simulated to get the states responses. For more clarity, the time domain responses were plotted from 0 to 2s. Moreover, the system is not stabilised at the beginning of the simulation, so it was decided to remove the first second for the spectral analysis. To visualise the signals in the frequency domain, we used the \textit{$power\_spectral\_density$} function given in the assignment \cite{assign} with $F_s = \frac{1}{TIME\_SIM} = 10 \ kHz$. The function output gives the power spectral density $P_{xx}$ in [$Amplitude^2$/Hz]. In order to convert it in [dB/Hz], we use: 
 \begin{equation*}
 P_{dB} = 10log_{10}(P_{xx})
 \end{equation*} 
 
 \begin{figure}[H]
  \centering 
- \includegraphics[trim=2cm 7cm 2cm 7cm, clip=true, totalheight=0.35\textheight, angle=0]{figures/responseNLMt2.pdf}
+ \includegraphics[trim=2cm 7cm 2cm 7cm, clip=true, totalheight=0.35\textheight, angle=0]{figures/P3timeDomain.pdf}
  \caption{Nonlinear Model: input $u_e$ and the states responses in the time domain}
  \label{fig:NLMt}
 \end{figure}
 
 \begin{figure}[H]
  \centering 
- \includegraphics[trim=2cm 7cm 2cm 7cm, clip=true, totalheight=0.35\textheight, angle=0]{figures/responseNLMf2.pdf}
+ \includegraphics[trim=2cm 7cm 2cm 7cm, clip=true, totalheight=0.35\textheight, angle=0]{figures/P3frequencyDomain.pdf}
  \caption{Nonlinear Model: input $u_e$ and the states responses in the frequency domain}
  \label{fig:NLMf}
 \end{figure}

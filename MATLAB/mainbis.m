@@ -32,17 +32,17 @@ tr = t(1/STEP_SIZE:length(t)); %tr = t; % tr = t(1/STEP_SIZE:length(t));
 %%
 figure
 grid on, axP = axes; set(axP, 'FontSize', 14)
-subplot(411), plot(tr,uer)
+subplot(411), plot(t(1:2/STEP_SIZE),ue(1:2/STEP_SIZE))
 title('input $u_e$ and states responses in time domain', 'FontSize', 14, 'Interpreter','Latex')
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$u_e$ [V]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(412), plot(tr,xsrp3(:,1))
+subplot(412), plot(t(1:2/STEP_SIZE),xsp3((1:2/STEP_SIZE),1))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$x$ [m]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(413), plot(tr,xsrp3(:,2))
+subplot(413), plot(t(1:2/STEP_SIZE),xsp3((1:2/STEP_SIZE),2))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$\dot{x}$ [m/s]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(414), plot(tr,xsrp3(:,3))
+subplot(414), plot(t(1:2/STEP_SIZE),xsp3((1:2/STEP_SIZE),3))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
 
@@ -64,19 +64,19 @@ figure
 grid on, axP = axes; set(axP, 'FontSize', 14)
 subplot(411), plot(fe,UE_db)
 title('Periodogram Using FFT')
-axis([-1 100 -inf inf]);
+axis([fc-10 5*fc -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$P_{u_e}$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
 subplot(412), plot(fp3(:,1),Pxxp3_db(:,1))
-axis([-1 100 -inf inf]);
+axis([fc-10 5*fc -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$P_{x}$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
 subplot(413), plot(fp3(:,2),Pxxp3_db(:,2))
-axis([-1 100 -inf inf]);
+axis([fc-10 5*fc -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$P_{\dot{x}}$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
 subplot(414), plot(fp3(:,3),Pxxp3_db(:,3))
-axis([-1 100 -inf inf]);
+axis([fc-10 5*fc -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$P_{i}$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
 
@@ -192,17 +192,17 @@ subplot(411), plot(t(1:20000),ue(1:20000))
 title('input $u_e$ and states responses in time domain', 'FontSize', 14, 'Interpreter','Latex')
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$u_e$ [V]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(412), plot(t(1:20000),xsp9(1:20000,1)); hold on; plot(t(1:20000),xsp3(1:20000,1));
+subplot(412), plot(t(1:20000),xsp9(1:20000,1)); hold on; plot(t(1:20000),xsp3(1:20000,1),'--');
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$x$ [m]', 'FontSize', 14, 'Interpreter','Latex')
 l = legend('linear model', 'nonlinear model');
 set(l, 'Interpreter','Latex');
-subplot(413), plot(t(1:20000),xsp9(1:20000,2)); hold on; plot(t(1:20000),xsp3(1:20000,2));
+subplot(413), plot(t(1:20000),xsp9(1:20000,2)); hold on; plot(t(1:20000),xsp3(1:20000,2),'--');
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$\dot{x}$ [m/s]', 'FontSize', 14, 'Interpreter','Latex')
 l = legend('linear model', 'nonlinear model');
 set(l, 'Interpreter','Latex');
-subplot(414), plot(t(1:20000),xsp9(1:20000,3)); hold on; plot(t(1:20000),xsp3(1:20000,3));
+subplot(414), plot(t(1:20000),xsp9(1:20000,3)); hold on; plot(t(1:20000),xsp3(1:20000,3),'--');
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
 l = legend('linear model', 'nonlinear model');
@@ -226,26 +226,26 @@ figure
 grid on, axP = axes; set(axP, 'FontSize', 14)
 subplot(411), plot(fe,UE_db)
 title('Periodogram Using FFT')
-axis([-1 100 -inf inf]);
+axis([fc-10 5*fc -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$P_{u_e}$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
 subplot(412), plot(fp9(:,1),Pxxp9_db(:,1));% hold on; plot(fp9(:,1),Pxxp3_db(:,1))
-axis([-1 100 -inf inf]);
+axis([fc-10 5*fc -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$P_{x}$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
-l = legend('linear model', 'nonlinear model');
+%l = legend('linear model', 'nonlinear model');
 %set(l, 'Interpreter','Latex');
 subplot(413), plot(fp9(:,2),Pxxp9_db(:,2));% hold on; plot(fp9(:,2),Pxxp3_db(:,2))
-axis([-1 100 -inf inf]);
+axis([fc-10 5*fc -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$P_{\dot{x}}$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
-l = legend('linear model', 'nonlinear model');
+%l = legend('linear model', 'nonlinear model');
 %set(l, 'Interpreter','Latex');
 subplot(414), plot(fp9(:,3),Pxxp9_db(:,3));% hold on; plot(fp9(:,3),Pxxp3_db(:,3))
-axis([-1 100 -inf inf]);
+axis([fc-10 5*fc -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$P_i$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
-l = legend('linear model', 'nonlinear model');
+%l = legend('linear model', 'nonlinear model');
 %set(l, 'Interpreter','Latex');
 
 %% PB10
@@ -270,18 +270,18 @@ subplot(411), plot(t(1:20000),ue(1:20000))
 title('input $u_e$ and states responses in time domain', 'FontSize', 14, 'Interpreter','Latex')
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$u_e$ [V]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(412), plot(t(1:20000),xsp10(1:20000,1)); hold on; plot(t(1:20000),xsp3(1:20000,1));
+subplot(412), plot(t(1:20000),xsp10(1:20000,1)); hold on; plot(t(1:20000),xsp3(1:20000,1),'--');
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$x$ [m]', 'FontSize', 14, 'Interpreter','Latex')
 l = legend('linear model', 'nonlinear model');
 set(l, 'Interpreter','Latex');
-subplot(413), plot(t(1:20000),xsp10(1:20000,2)); hold on; plot(t(1:20000),xsp3(1:20000,2));
+subplot(413), plot(t(1:20000),xsp10(1:20000,2)); hold on; plot(t(1:20000),xsp3(1:20000,2),'--');
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$\dot{x}$ [m/s]', 'FontSize', 14, 'Interpreter','Latex')
 l = legend('linear model', 'nonlinear model');
 set(l, 'Interpreter','Latex');
 subplot(414); 
-plot(t(1:20000),xsp10(1:20000,3)); hold on; plot(t(1:20000),xsp3(1:20000,3));
+plot(t(1:20000),xsp10(1:20000,3)); hold on; plot(t(1:20000),xsp3(1:20000,3),'--');
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
 l = legend('linear model', 'nonlinear model');
@@ -303,27 +303,27 @@ figure
 grid on, axP = axes; set(axP, 'FontSize', 14)
 subplot(411), plot(fe,UE_db)
 title('Periodogram Using FFT')
-axis([-1 100 -inf inf]);
+axis([fc-10 5*fc -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
-ylabel('PSD of $u_e$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$P_{u_e}$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
 subplot(412), plot(fp10(:,1),Pxxp10_db(:,1)); hold on; plot(fp3(:,1),Pxxp3_db(:,1));
 l = legend('linear model', 'nonlinear model');
 set(l, 'Interpreter','Latex');
-axis([-1 100 -inf inf]);
+axis([fc-10 5*fc -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
-ylabel('PSD of $x$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$P_{x}$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
 subplot(413), plot(fp10(:,2),Pxxp10_db(:,2)); hold on; plot(fp3(:,2),Pxxp3_db(:,2));
 l = legend('linear model', 'nonlinear model');
 set(l, 'Interpreter','Latex');
-axis([-1 100 -inf inf]);
+axis([fc-10 5*fc -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
-ylabel('PSD of $\dot{x}$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(414); plot(fp10(:,3),Pxxp10_db(:,3)); hold on; plot(fp3(:,3),Pxxp3_db(:,3));
+ylabel('$P_{\dot{x}}$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
+subplot(414); plot(fp10(:,3),Pxxp10_db(:,3)); hold on; plot(fp3(:,3),Pxxp3_db(:,3),'--');
 l = legend('linear model', 'nonlinear model');
 set(l, 'Interpreter','Latex');
-axis([-1 100 -inf inf]);
+axis([fc-10 5*fc -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
-ylabel('PSD of $i$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$P_{i}$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
 Pxxp10_db(40*TIME_SIM+1, 3), Pxxp10_db(60*TIME_SIM+1, 3);
 
 amplitude(xsp10(:,3), TIME_SIM, 40);
@@ -343,69 +343,75 @@ Noise1d = NoiseAmp(2)*sin(4*pi*fc*k*Ts);
 Noise2d = NoiseAmp(3)*sin(6*pi*fc*k*Ts);
 
 [ts,xsp13,ys] = sim('modelP13',TIME_SIM,[],[(k*Ts)' ued'], [(k*Ts)' Noise1d'], [(k*Ts)' Noise2d']);
-uedr = ued(1/STEP_SIZE:length(k));   
-xsrp13 = xsp13(1/STEP_SIZE:length(k),:);
-kr = k(1/STEP_SIZE:length(k));
+uedr = uoutP13.Data(1/Ts:end);   
+xsrp13 = xoutP13.Data(1/Ts:end,:);
+kr = k(1/Ts:length(k));
 %time domain
 figure
-subplot(411), plot(t(1:20000),ue(1:20000))
+grid on, axP = axes; set(axP, 'FontSize', 14)
+subplot(411), stairs(k(1:2/Ts)*Ts,uoutP13.Data(1:2/Ts)); hold on; plot(t(1:2/STEP_SIZE),ue(1:2/STEP_SIZE),'--');
 title('input $u_e$ and states responses in time domain', 'FontSize', 14, 'Interpreter','Latex')
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$u_e$ [V]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(412), plot(t(1:20000),xsp13(1:20000,1)); hold on; plot(t(1:20000),xsp3(1:20000,1));
+l = legend('Discrete Time model', 'Continuous Time Model');
+set(l, 'Interpreter','Latex');
+subplot(412), stairs(k(1:2/Ts)*Ts,xoutP13.Data((1:2/Ts),1)); hold on; plot(t(1:2/STEP_SIZE),xsp10((1:2/STEP_SIZE),1),'--');
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$x$ [m]', 'FontSize', 14, 'Interpreter','Latex')
-l = legend('linear model', 'nonlinear model');
+l = legend('Discrete Time model', 'Continuous Time Model');
 set(l, 'Interpreter','Latex');
-subplot(413), plot(t(1:20000),xsp13(1:20000,2)); hold on; plot(t(1:20000),xsp3(1:20000,2));
+subplot(413), stairs(k(1:2/Ts)*Ts,xoutP13.Data((1:2/Ts),2)); hold on; plot(t(1:2/STEP_SIZE),xsp10((1:2/STEP_SIZE),2),'--');
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$\dot{x}$ [m/s]', 'FontSize', 14, 'Interpreter','Latex')
-l = legend('linear model', 'nonlinear model');
+l = legend('Discrete Time model', 'Continuous Time Model');
 set(l, 'Interpreter','Latex');
-subplot(414); plot(t(1:20000),xsp13(1:20000,3)); hold on; plot(t(1:20000),xsp3(1:20000,3));
+subplot(414), stairs(k(1:2/Ts)*Ts,xoutP13.Data((1:2/Ts),3)); hold on; plot(t(1:2/STEP_SIZE),xsp10((1:2/STEP_SIZE),3),'--');
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
-l = legend('linear model', 'nonlinear model');
+l = legend('Discrete Time model', 'Continuous Time Model');
 set(l, 'Interpreter','Latex');
 
 %freq domain
 Pxxp13=[];
 fp13=[];
+Fsd = 1/Ts;
 for i = 1:1:3
-[Pxx_tmp, f_tmp]=power_spectral_density(xsrp13(:,i), Fs);
+[Pxx_tmp, f_tmp]=power_spectral_density(xsrp13(:,i), Fsd);
 Pxxp13=[Pxxp13, Pxx_tmp];
 fp13=[fp13, f_tmp'];
 end
-[UE, fe]=power_spectral_density(uedr, Fs);
+[UEd, fed]=power_spectral_density(uedr, Fsd);
 Pxxp13_db=10*log10(Pxxp13);
-UE_db=10*log10(UE);
+UE_dbd=10*log10(UEd);
 
 %freq domain
 figure
 grid on, axP = axes; set(axP, 'FontSize', 14)
-subplot(411), plot(fe,UE_db)
+subplot(411), plot(fed,UE_dbd); hold on; plot(fe,UE_db,'--');
 title('Periodogram Using FFT')
-axis([-1 100 -inf inf]);
+axis([fc-10 5*fc -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
-ylabel('PSD of $u_e$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(412), plot(fp13(:,1),Pxxp10_db(:,1)); hold on; plot(fp3(:,1),Pxxp3_db(:,1));
-l = legend('linear model', 'nonlinear model');
+ylabel('$P_{u_e}$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
+l = legend('Discrete Time model', 'Continuous Time Model');
 set(l, 'Interpreter','Latex');
-axis([-1 100 -inf inf]);
+subplot(412), plot(fp13(:,1),Pxxp13_db(:,1)); hold on; plot(fp10(:,1),Pxxp10_db(:,1),'--');
+axis([fc-10 5*fc -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
-ylabel('PSD of $x$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(413), plot(fp13(:,2),Pxxp10_db(:,2)); hold on; plot(fp3(:,2),Pxxp3_db(:,2));
-l = legend('linear model', 'nonlinear model');
+ylabel('$P_{x}$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
+l = legend('Discrete Time model', 'Continuous Time Model');
 set(l, 'Interpreter','Latex');
-axis([-1 100 -inf inf]);
+subplot(413), plot(fp13(:,2),Pxxp13_db(:,2)); hold on; plot(fp10(:,2),Pxxp10_db(:,2),'--');
+axis([fc-10 5*fc -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
-ylabel('PSD of $\dot{x}$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(414); plot(fp13(:,3),Pxxp10_db(:,3)); hold on; plot(fp3(:,3),Pxxp3_db(:,3));
-l = legend('linear model', 'nonlinear model');
+ylabel('$P_{\dot{x}}$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
+l = legend('Discrete Time model', 'Continuous Time Model');
 set(l, 'Interpreter','Latex');
-axis([-1 100 -inf inf]);
+subplot(414), plot(fp13(:,3),Pxxp13_db(:,3)); hold on; plot(fp10(:,3),Pxxp10_db(:,3),'--');
+axis([fc-10 5*fc -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
-ylabel('PSD of $i$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$P_{i}$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
+l = legend('Discrete Time model', 'Continuous Time Model');
+set(l, 'Interpreter','Latex');
 
 
 %% Pb14
@@ -415,7 +421,7 @@ rank(Mc); % = 3, controllable
 %% Pb15
 C=[1 0 0];
 %continous to discrete
-% Pconti= [-4000, -1200-1000i, -1200+1000i];%[-2000, -1200-1000i, -1200+1000i]; %[-900, -700-400i, -700+400i];
+Pconti= [-4000, -1200-1000i, -1200+1000i];%[-2000, -1200-1000i, -1200+1000i]; %[-900, -700-400i, -700+400i];
 % Kcon=acker(A,B,Pconti);
 % Ak=A-B*Kcon;
 % sys=ss(A,B,C,[]);
@@ -437,7 +443,11 @@ Pdisc = [0.6703 + 0.0000i, 0.8825 - 0.0885i, 0.8825 + 0.0885i];
 K=acker(F,G,Pdisc);
 Fk=F-G*K;
 sys_kd=ss(Fk,G,C,0,Ts);
-bode(sys_kd);
+%bode(sys_kd);
+tau1 = 1/Pconti(1)
+ome1 = sqrt(imag(Pconti(2))^2 + real(Pconti(2))^2)
+dzeta1 = -real(Pconti(2))/ome1
+ome1/(2*pi)
 
 %%
 Ax=0.0008; %[m]
@@ -446,31 +456,21 @@ N = inv(C*inv(eye(3)-Fk)*G);
 %Av=Ax*N; %8.3749; %Ax/MAG2;
 xref=Ax*sin(2*pi*fc*k*Ts);
 [ts,xsp15,ys] = sim('modelP15',TIME_SIM,[],[(k*Ts)' xref'], [(k*Ts)' Noise1d'], [(k*Ts)' Noise2d']);
-xrefr = xref(1/STEP_SIZE:length(k));   
-xsrp15 = xsp15(1/STEP_SIZE:length(k),:);
+xrefr = xref(1/Ts:end);   
+xsrp15 = xsp15(1/Ts:end,:);
 
 %time domain
 figure
 grid on, axP = axes; set(axP, 'FontSize', 14)
-subplot(411), plot((kr*Ts),xrefr)
-title('input $u_e$ and states responses in time domain', 'FontSize', 14, 'Interpreter','Latex')
-xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
-ylabel('$u_e$', 'FontSize', 14, 'Interpreter','Latex')
-subplot(412), plot((kr*Ts),xsrp15(:,1)); hold on; plot((kr*Ts),xrefr)
+subplot(411),plot((k(2/Ts:2.2/Ts)*Ts),xoutP15.Data((2/Ts:2.2/Ts),1)); hold on; plot((k(2/Ts:2.2/Ts)*Ts),xref(2/Ts:2.2/Ts),'--')
 l = legend('state $x$', '$x_{ref}$');
 set(l, 'Interpreter','Latex');
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$x$ [m]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(413), plot((kr*Ts),xsrp15(:,2))
-xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
-ylabel('$\dot{x}$ [m/s]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(414), plot((kr*Ts),xsrp15(:,3))
-xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
-ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
 
 figure;
 grid on, axP = axes; set(axP, 'FontSize', 14)
-subplot(411), plot(k*Ts,ucontP15.Data)
+subplot(411), plot(k(1:2/Ts)*Ts,ucontP15.Data(1:2/Ts))
 title('control input $u_e$', 'FontSize', 14, 'Interpreter','Latex')
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$u_e$', 'FontSize', 14, 'Interpreter','Latex')
@@ -482,7 +482,7 @@ xref_c1 = Ax*sin(2*pi*fc*t);
 Noise10 = 0*t;
 Noise20 = 0*t;
 [ts,xsp1601,ys] = sim('modelP16',TIME_SIM,[],[t' xref_c1'], [t' Noise10'], [t' Noise20']);
-xref_cr = xref_c(1/STEP_SIZE:length(t));   
+xref_cr = xref_c1(1/STEP_SIZE:length(t));   
 xsrp1601 = xsp1601(1/STEP_SIZE:length(t),:);
 Ax=0.00075;
 xref_c2 = Ax*sin(2*pi*fc*t);
@@ -505,17 +505,17 @@ grid on, axP = axes; set(axP, 'FontSize', 14)
 % subplot(413), plot(t(1:20000),xsp160(1:20000,2))
 % xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 % ylabel('$\dot{x}$ [m/s]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(311), plot(t(1:20000),xsp1601(1:20000,1)); hold on; plot(t(1:20000),xref_c1(1:20000));
+subplot(311), plot(t(1:20000),xsp1601(1:20000,1)); hold on; plot(t(1:20000),xref_c1(1:20000),'--');
 l = legend('state $x$', '$x_{ref}$');
 set(l, 'Interpreter','Latex');
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$x$ [m]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(312), plot(t(1:20000),xsp1602(1:20000,1)); hold on; plot(t(1:20000),xref_c2(1:20000));
+subplot(312), plot(t(1:20000),xsp1602(1:20000,1)); hold on; plot(t(1:20000),xref_c2(1:20000),'--');
 l = legend('state $x$', '$x_{ref}$');
 set(l, 'Interpreter','Latex');
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$x$ [m]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(313), plot(t(1:20000),xsp1603(1:20000,1)); hold on; plot(t(1:20000),xref_c3(1:20000));
+subplot(313), plot(t(1:20000),xsp1603(1:20000,1)); hold on; plot(t(1:20000),xref_c3(1:20000),'--');
 l = legend('state $x$', '$x_{ref}$');
 set(l, 'Interpreter','Latex');
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
@@ -540,17 +540,17 @@ grid on, axP = axes; set(axP, 'FontSize', 14)
 % title('input $u_e$ and states responses in time domain', 'FontSize', 14, 'Interpreter','Latex')
 % xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 % ylabel('$u_e$', 'FontSize', 14, 'Interpreter','Latex')
-subplot(311), plot(t(1:20000),xsp161(1:20000,1)); hold on; plot(t(1:20000),xref_c1(1:20000));
+subplot(311), plot(t(1:20000),xsp161(1:20000,1)); hold on; plot(t(1:20000),xref_c1(1:20000),'--');
 l = legend('state $x$', '$x_{ref}$');
 set(l, 'Interpreter','Latex');
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$x$ [m]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(312), plot(t(1:20000),xsp162(1:20000,1)); hold on; plot(t(1:20000),xref_c2(1:20000));
+subplot(312), plot(t(1:20000),xsp162(1:20000,1)); hold on; plot(t(1:20000),xref_c2(1:20000),'--');
 l = legend('state $x$', '$x_{ref}$');
 set(l, 'Interpreter','Latex');
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$x$ [m]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(313), plot(t(1:20000),xsp163(1:20000,1)); hold on; plot(t(1:20000),xref_c3(1:20000));
+subplot(313), plot(t(1:20000),xsp163(1:20000,1)); hold on; plot(t(1:20000),xref_c3(1:20000),'--');
 l = legend('state $x$', '$x_{ref}$');
 set(l, 'Interpreter','Latex');
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
@@ -565,7 +565,7 @@ ylabel('$x$ [m]', 'FontSize', 14, 'Interpreter','Latex')
 Pxxp1601=[];
 fp1601=[];
 for i = 1:1:3
-[Pxx_tmp, f_tmp]=power_spectral_density(xsrp16(:,i), Fs);
+[Pxx_tmp, f_tmp]=power_spectral_density(xsrp1601(:,i), Fs);
 Pxxp1601=[Pxxp1601, Pxx_tmp];
 fp1601=[fp1601, f_tmp'];
 end
@@ -576,7 +576,7 @@ XREF_db=10*log10(XREF);
 Pxxp161=[];
 fp161=[];
 for i = 1:1:3
-[Pxx_tmp, f_tmp]=power_spectral_density(xsrp16(:,i), Fs);
+[Pxx_tmp, f_tmp]=power_spectral_density(xsrp161(:,i), Fs);
 Pxxp161=[Pxxp161, Pxx_tmp];
 fp161=[fp161, f_tmp'];
 end
@@ -619,7 +619,7 @@ xref_cr = xref_c(1/STEP_SIZE:length(t));
 %time domain
 figure
 grid on, axP = axes; set(axP, 'FontSize', 14)
-subplot(411), plot(t(1:20000),xsp17(1:20000,1)); hold on; plot(t(1:20000),xref_c(1:20000));
+subplot(411), plot(t(1:20000),xsp17(1:20000,1)); hold on; plot(t(1:20000),xref_c(1:20000),'--');
 l = legend('state $x$', '$x_{ref}$');
 set(l, 'Interpreter','Latex');
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
@@ -652,27 +652,27 @@ figure
 grid on, axP = axes; set(axP, 'FontSize', 14)
 subplot(411), plot(fe,XREF_db)
 title('Periodogram Using FFT')
-axis([-1 100 -inf inf]);
+axis([fc-10 5*fc -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
-ylabel('PSD of $u_e$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$P_{u_e}$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
 subplot(412), plot(fp17(:,1),Pxxp17_db(:,1)); hold on; plot(fp3(:,1),Pxxp3_db(:,1));
 l = legend('nonlinear model with controller', 'nonlinear model');
 set(l, 'Interpreter','Latex');
-axis([-1 100 -inf inf]);
+axis([fc-10 5*fc -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
-ylabel('PSD of $x$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$P_x$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
 subplot(413), plot(fp17(:,2),Pxxp17_db(:,2)); hold on; plot(fp3(:,2),Pxxp3_db(:,2));
 l = legend('nonlinear model with controller', 'nonlinear model');
 set(l, 'Interpreter','Latex');
-axis([-1 100 -inf inf]);
+axis([fc-10 5*fc -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
-ylabel('PSD of $\dot{x}$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$P_{\dot{x}}$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
 subplot(414), plot(fp17(:,3),Pxxp17_db(:,3)); hold on; plot(fp3(:,3),Pxxp3_db(:,3));
 l = legend('nonlinear model with controller', 'nonlinear model');
 set(l, 'Interpreter','Latex');
-axis([-1 100 -inf inf]);
+axis([fc-10 5*fc -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
-ylabel('PSD of $i$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$P_i$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
 
 Amplitudep17=[];
 for j=1:3
@@ -687,54 +687,54 @@ d2_control = Amplitudep17(2,2)/sqrt(Amplitudep17(2,1)^2+Amplitudep17(2,2)^2)*100
 d3_control = Amplitudep17(2,3)/sqrt(Amplitudep17(2,1)^2+Amplitudep17(2,3)^2)*100;
 
 %% Pb 18
-% AxPb18 = 0.0005:0.00025:0.001; % m
-% fcPb18 = 20:5:200; % Hz
-% d2Pb18 = zeros(length(AxPb18),length(fcPb18));
-% d3Pb18 = zeros(length(AxPb18),length(fcPb18));
-% 
-% for k=1:length(AxPb18)
-%     for l=1:length(fcPb18)
-%         xrefPb18 = AxPb18(k)*sin(2*pi*fcPb18(l)*t);
-%         [tsPb18,xsPb18,ysPb18] = sim('modelP17',TIME_SIM,[],[t' xrefPb18']);
-%         xsrPb18 = xsPb18(1/STEP_SIZE:length(t),:); 
-%         
-%         AmplitudePb18=[];
-%         for j=1:3
-%             for i=1:3
-%                AmplitudePb18(j,i)=amplituder(xsrPb18(:,j), TIME_SIM, fcPb18(l)*i);
-%             end
-%         end
-%         d2Pb18(k,l) = AmplitudePb18(2,2)/sqrt(AmplitudePb18(2,1)^2+AmplitudePb18(2,2)^2)*100;
-%         d3Pb18(k,l) = AmplitudePb18(2,3)/sqrt(AmplitudePb18(2,1)^2+AmplitudePb18(2,3)^2)*100;
-%     end
-% end
-% 
-% figure
-% grid on, axP = axes; set(axP, 'FontSize', 14)
-% subplot(311)
-% plot(fcPb18, d2Pb18(1,:))
-% hold on
-% plot(fcPb18, d3Pb18(1,:))
-% xlabel('Frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
-% ylabel('$A_x = 0.0005$ m', 'FontSize', 14, 'Interpreter','Latex')
-% l=legend('$d_2 [\%]$','$d_3 [\%]$');
-% set(l, 'FontSize',14, 'Interpreter','Latex')
-% subplot(312)
-% plot(fcPb18, d2Pb18(2,:))
-% hold on
-% plot(fcPb18, d3Pb18(2,:))
-% xlabel('Frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
-% ylabel('$A_x = 0.00075$ m', 'FontSize', 14, 'Interpreter','Latex')
-% l=legend('$d_2 [\%]$','$d_3 [\%]$');
-% set(l, 'FontSize',14, 'Interpreter','Latex')
-% subplot(313)
-% plot(fcPb18, d2Pb18(3,:))
-% hold on
-% plot(fcPb18, d3Pb18(3,:))
-% xlabel('Frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
-% ylabel('$A_x = 0.001$ m', 'FontSize', 14, 'Interpreter','Latex')
-% l=legend('$d_2 [\%]$','$d_3 [\%]$');
-% set(l, 'FontSize',14, 'interpreter','Latex')
+AxPb18 = 0.0005:0.00025:0.001; % m
+fcPb18 = 20:5:200; % Hz
+d2Pb18 = zeros(length(AxPb18),length(fcPb18));
+d3Pb18 = zeros(length(AxPb18),length(fcPb18));
+
+for k=1:length(AxPb18)
+    for l=1:length(fcPb18)
+        xrefPb18 = AxPb18(k)*sin(2*pi*fcPb18(l)*t);
+        [tsPb18,xsPb18,ysPb18] = sim('modelP17',TIME_SIM,[],[t' xrefPb18']);
+        xsrPb18 = xsPb18(1/STEP_SIZE:length(t),:); 
+        
+        AmplitudePb18=[];
+        for j=1:3
+            for i=1:3
+               AmplitudePb18(j,i)=amplituder(xsrPb18(:,j), TIME_SIM, fcPb18(l)*i);
+            end
+        end
+        d2Pb18(k,l) = AmplitudePb18(2,2)/sqrt(AmplitudePb18(2,1)^2+AmplitudePb18(2,2)^2)*100;
+        d3Pb18(k,l) = AmplitudePb18(2,3)/sqrt(AmplitudePb18(2,1)^2+AmplitudePb18(2,3)^2)*100;
+    end
+end
+
+figure
+grid on, axP = axes; set(axP, 'FontSize', 14)
+subplot(311)
+plot(fcPb18, d2Pb18(1,:))
+hold on
+plot(fcPb18, d3Pb18(1,:))
+xlabel('Frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$A_x = 0.0005$ m', 'FontSize', 14, 'Interpreter','Latex')
+l=legend('$d_2 [\%]$','$d_3 [\%]$');
+set(l, 'FontSize',14, 'Interpreter','Latex')
+subplot(312)
+plot(fcPb18, d2Pb18(2,:))
+hold on
+plot(fcPb18, d3Pb18(2,:))
+xlabel('Frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$A_x = 0.00075$ m', 'FontSize', 14, 'Interpreter','Latex')
+l=legend('$d_2 [\%]$','$d_3 [\%]$');
+set(l, 'FontSize',14, 'Interpreter','Latex')
+subplot(313)
+plot(fcPb18, d2Pb18(3,:))
+hold on
+plot(fcPb18, d3Pb18(3,:))
+xlabel('Frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$A_x = 0.001$ m', 'FontSize', 14, 'Interpreter','Latex')
+l=legend('$d_2 [\%]$','$d_3 [\%]$');
+set(l, 'FontSize',14, 'interpreter','Latex')
 
 
 %% Pb 19
@@ -770,7 +770,7 @@ w60 = 2*pi*3*fc;
 [Aw60 Bw60 Cw60 Dw60] = tf2ss(sym2poly(num60),sym2poly(den60));
 Aw = [Aw40 zeros(2,2)
     zeros(2,2) Aw60];
-Axw = [Bd(:,1)*Cw40 Bd(:,2)*Cw40];
+Axw = [Bd(:,1)*Cw40 Bd(:,2)*Cw60];
 AkP19 = [A Axw;
     zeros(4,3) Aw];
 lambdaAw = eig(Aw);

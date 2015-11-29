@@ -14,8 +14,8 @@ function [ res ] = amplitude(x, TIME_SIM, fr)
 end
 \end{lstlisting}
 
-Finally for a TIME\_SIM = 5s, for the voice coil velocity $THD = 2.57 \ \%$. 
-We then use the equations \eqref{d2} and \eqref{d3} to compute the second and third order harmonic distortion. We obtain $d_2 = 2.48 \ \%$ and $d_3 = 0.65 \ \%$.
+Finally for a TIME\_SIM = 5s, for the voice coil velocity $THD = 2.435 \ \%$. 
+We then use the equations \eqref{d2} and \eqref{d3} to compute the second and third order harmonic distortion. We obtain $d_2 = 2.37 \ \%$ and $d_3 = 0.54 \ \%$.
 \begin{equation}
 d_2 = \frac{A_2}{\sqrt{A_1^2 + A_2^2}} \ 100\%
 \label{d2}
@@ -25,4 +25,4 @@ d_3 = \frac{A_3}{\sqrt{A_1^2 + A_3^2}} \ 100\%
 \label{d3}
 \end{equation}
 
-We can notice that $d_2$ corresponds to the THD calculated for $N=2$. Because the amplitudes of the harmonics decrease when the order gets bigger, it is logical that the values of THD and $d_2$ are quite similar. On the contrary, $A_3$ is negligible in front of $A_1$, that why $d_3$ is small and far from the THD. 
+We can notice that $d_2$ corresponds to the THD calculated for $N=2$. Because the amplitudes of the harmonics decrease when the order gets bigger, it is logical that the values of THD and $d_2$ are quite similar. On the contrary, $A_3$ is negligible in front of $A_1$, that is why $d_3$ is small compare to the THD.

@@ -1,4 +1,4 @@
-\documentclass[12pt,a4paper,fleqn, onesside]{report}
+\documentclass[11pt,a4paper,fleqn, onesside]{report}
 %
 \usepackage[T1]{fontenc}
 \usepackage{amsmath, amssymb, amsthm}
@@ -156,9 +156,16 @@ y_{nl}(t)=A_1\sin(2\pi f_ct+\psi_1)+A_2\sin(4\pi f_ct+\psi_2)+A_3\sin(6\pi f_ct+
 \addcontentsline{toc}{subsubsection}{Problem 12}
 \input{Problem12}
 
-\subsection*{Problem 12}
+\subsection*{Problem 13}
 \addcontentsline{toc}{subsubsection}{Problem 13}
-%\input{Problem13}
+\input{Problem13}
+
+\subsection{Voice coil position reference tracking}
+\input{Problem14}
+
+\subsection*{Problem 15}
+\addcontentsline{toc}{subsubsection}{Problem 15}
+\input{Problem15}
 
 \subsection*{Problem 16}
 \addcontentsline{toc}{subsubsection}{Problem 16}
@@ -168,8 +175,16 @@ y_{nl}(t)=A_1\sin(2\pi f_ct+\psi_1)+A_2\sin(4\pi f_ct+\psi_2)+A_3\sin(6\pi f_ct+
 \addcontentsline{toc}{subsubsection}{Problem 17}
 \input{Problem17}
 
+\subsection*{Problem 18}
+\addcontentsline{toc}{subsubsection}{Problem 18}
+\input{Problem18}
+
+\subsection{Output feedback voice coil position tracking control with disturbance rejection}
+\input{Problem19}
+
 \appendix
 \chapter{SIMULINK Model of the Linear System}
+\label{AppLinearModelP9}
 \begin{figure}[H]
  \centering 
  \includegraphics[trim=5cm 7cm 2cm 7cm, clip=true, totalheight=0.25\textheight, angle=0]{figures/linearModelMatrix.pdf}
@@ -177,7 +192,8 @@ y_{nl}(t)=A_1\sin(2\pi f_ct+\psi_1)+A_2\sin(4\pi f_ct+\psi_2)+A_3\sin(6\pi f_ct+
 \label{fig:linearModelMatrix}
 \end{figure}
 
-\chapter{SIMULINK Model of the Linear System with Disturbance}
+\chapter{SIMULINK Model of the Linear System with Disturbance in Continuous Time}
+\label{AppLinearModelNoiseP11}
 \begin{figure}[H]
  \centering 
  \includegraphics[trim=5cm 5cm 2cm 5cm, clip=true, totalheight=0.35\textheight, angle=0]{figures/linearModelNoise.pdf}
@@ -185,7 +201,26 @@ y_{nl}(t)=A_1\sin(2\pi f_ct+\psi_1)+A_2\sin(4\pi f_ct+\psi_2)+A_3\sin(6\pi f_ct+
 \label{fig:linearModelNoise}
 \end{figure}
 
+\chapter{SIMULINK Model of the Linear System with Disturbance in Discrete Time}
+\label{AppDiscreteTimeP13}
+\begin{figure}[H]
+ \centering 
+ \includegraphics[trim=5cm 5cm 2cm 5cm, clip=true, totalheight=0.35\textheight, angle=0]{figures/modelP13.pdf}
+ \caption{SIMULINK Model of the Linear System with Disturbance in Discrete Time}
+\label{fig:modelP13}
+\end{figure}
+
+\chapter{SIMULINK Model of the Discrete Time Linear System with the Feedback Controller}
+\label{AppDiscreteTimeP15}
+\begin{figure}[H]
+ \centering 
+ \includegraphics[trim=3cm 4cm 2cm 3cm, clip=true, totalheight=0.35\textheight, angle=0]{figures/modelP15.pdf}
+ \caption{SIMULINK Model of the Discrete Time Linear System with the Feedback Controller}
+\label{fig:modelP15}
+\end{figure}
+
 \chapter{SIMULINK Model of the Continuous Time Linear System with the Discrete Time Feedback}
+\label{AppP16}
 \begin{figure}[H]
  \centering 
  \includegraphics[trim=1cm 3cm 2cm 3cm, clip=true, totalheight=0.35\textheight, angle=0]{figures/modelp16.pdf}
@@ -194,6 +229,7 @@ y_{nl}(t)=A_1\sin(2\pi f_ct+\psi_1)+A_2\sin(4\pi f_ct+\psi_2)+A_3\sin(6\pi f_ct+
 \end{figure}
 
 \chapter{SIMULINK Model of the Nonlinear Model with the Discrete Time Feedback}
+\label{AppP17}
 \begin{figure}[H]
  \centering 
  \includegraphics[trim=1cm 0cm 2cm 0cm, clip=true, totalheight=0.35\textheight, angle=0]{figures/modelp17.pdf}
