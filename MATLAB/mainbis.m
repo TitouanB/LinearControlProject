@@ -687,54 +687,54 @@ d2_control = Amplitudep17(2,2)/sqrt(Amplitudep17(2,1)^2+Amplitudep17(2,2)^2)*100
 d3_control = Amplitudep17(2,3)/sqrt(Amplitudep17(2,1)^2+Amplitudep17(2,3)^2)*100;
 
 %% Pb 18
-AxPb18 = 0.0005:0.00025:0.001; % m
-fcPb18 = 20:5:200; % Hz
-d2Pb18 = zeros(length(AxPb18),length(fcPb18));
-d3Pb18 = zeros(length(AxPb18),length(fcPb18));
-
-for k=1:length(AxPb18)
-    for l=1:length(fcPb18)
-        xrefPb18 = AxPb18(k)*sin(2*pi*fcPb18(l)*t);
-        [tsPb18,xsPb18,ysPb18] = sim('modelP17',TIME_SIM,[],[t' xrefPb18']);
-        xsrPb18 = xsPb18(1/STEP_SIZE:length(t),:); 
-        
-        AmplitudePb18=[];
-        for j=1:3
-            for i=1:3
-               AmplitudePb18(j,i)=amplituder(xsrPb18(:,j), TIME_SIM, fcPb18(l)*i);
-            end
-        end
-        d2Pb18(k,l) = AmplitudePb18(2,2)/sqrt(AmplitudePb18(2,1)^2+AmplitudePb18(2,2)^2)*100;
-        d3Pb18(k,l) = AmplitudePb18(2,3)/sqrt(AmplitudePb18(2,1)^2+AmplitudePb18(2,3)^2)*100;
-    end
-end
-
-figure
-grid on, axP = axes; set(axP, 'FontSize', 14)
-subplot(311)
-plot(fcPb18, d2Pb18(1,:))
-hold on
-plot(fcPb18, d3Pb18(1,:))
-xlabel('Frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
-ylabel('$A_x = 0.0005$ m', 'FontSize', 14, 'Interpreter','Latex')
-l=legend('$d_2 [\%]$','$d_3 [\%]$');
-set(l, 'FontSize',14, 'Interpreter','Latex')
-subplot(312)
-plot(fcPb18, d2Pb18(2,:))
-hold on
-plot(fcPb18, d3Pb18(2,:))
-xlabel('Frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
-ylabel('$A_x = 0.00075$ m', 'FontSize', 14, 'Interpreter','Latex')
-l=legend('$d_2 [\%]$','$d_3 [\%]$');
-set(l, 'FontSize',14, 'Interpreter','Latex')
-subplot(313)
-plot(fcPb18, d2Pb18(3,:))
-hold on
-plot(fcPb18, d3Pb18(3,:))
-xlabel('Frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
-ylabel('$A_x = 0.001$ m', 'FontSize', 14, 'Interpreter','Latex')
-l=legend('$d_2 [\%]$','$d_3 [\%]$');
-set(l, 'FontSize',14, 'interpreter','Latex')
+% AxPb18 = 0.0005:0.00025:0.001; % m
+% fcPb18 = 20:5:200; % Hz
+% d2Pb18 = zeros(length(AxPb18),length(fcPb18));
+% d3Pb18 = zeros(length(AxPb18),length(fcPb18));
+% 
+% for k=1:length(AxPb18)
+%     for l=1:length(fcPb18)
+%         xrefPb18 = AxPb18(k)*sin(2*pi*fcPb18(l)*t);
+%         [tsPb18,xsPb18,ysPb18] = sim('modelP17',TIME_SIM,[],[t' xrefPb18']);
+%         xsrPb18 = xsPb18(1/STEP_SIZE:length(t),:); 
+%         
+%         AmplitudePb18=[];
+%         for j=1:3
+%             for i=1:3
+%                AmplitudePb18(j,i)=amplituder(xsrPb18(:,j), TIME_SIM, fcPb18(l)*i);
+%             end
+%         end
+%         d2Pb18(k,l) = AmplitudePb18(2,2)/sqrt(AmplitudePb18(2,1)^2+AmplitudePb18(2,2)^2)*100;
+%         d3Pb18(k,l) = AmplitudePb18(2,3)/sqrt(AmplitudePb18(2,1)^2+AmplitudePb18(2,3)^2)*100;
+%     end
+% end
+% 
+% figure
+% grid on, axP = axes; set(axP, 'FontSize', 14)
+% subplot(311)
+% plot(fcPb18, d2Pb18(1,:))
+% hold on
+% plot(fcPb18, d3Pb18(1,:))
+% xlabel('Frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
+% ylabel('$A_x = 0.0005$ m', 'FontSize', 14, 'Interpreter','Latex')
+% l=legend('$d_2 [\%]$','$d_3 [\%]$');
+% set(l, 'FontSize',14, 'Interpreter','Latex')
+% subplot(312)
+% plot(fcPb18, d2Pb18(2,:))
+% hold on
+% plot(fcPb18, d3Pb18(2,:))
+% xlabel('Frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
+% ylabel('$A_x = 0.00075$ m', 'FontSize', 14, 'Interpreter','Latex')
+% l=legend('$d_2 [\%]$','$d_3 [\%]$');
+% set(l, 'FontSize',14, 'Interpreter','Latex')
+% subplot(313)
+% plot(fcPb18, d2Pb18(3,:))
+% hold on
+% plot(fcPb18, d3Pb18(3,:))
+% xlabel('Frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
+% ylabel('$A_x = 0.001$ m', 'FontSize', 14, 'Interpreter','Latex')
+% l=legend('$d_2 [\%]$','$d_3 [\%]$');
+% set(l, 'FontSize',14, 'interpreter','Latex')
 
 
 %% Pb 19
@@ -776,8 +776,13 @@ AkP19 = [A Axw;
 lambdaAw = eig(Aw);
 BkP19 = [B;zeros(4,1)];
 CkP19 = [C_p19 0 0 0 0];
-Bkn = [zeros(3,6);
-    zeros(4,2) eye(4)];
+Akbis = [0 0;
+        0 AkP19(2,2);
+        AkP19(3,3) 0];
+sigmaVnd = [0.2 0.3 0.4 0.5];
+Vnd = diag(sigmaVnd);
+Bkn = [Akbis zeros(3,4); 
+    zeros(4,2) Vnd];
 
 % observability
 MoP19 = [CkP19
@@ -794,7 +799,7 @@ rank(MoP19); % 5 != 7
 sigmai = 0.1; % A
 sigmav = 0.05; % m/s
 sigman2 = 0.001; % A
-
+beta = 125;
 % sigma 2 = ajouter white noise a la sortie du syst = easy
 
 % nx:
@@ -804,7 +809,29 @@ sigman2 = 0.001; % A
 % with nxdot = -beta*nx+sqrt(2*beta)*[sigmai; sigmav]*whitenoise
 % whitenoise ???
 
+Aa = [AkP19 [Akbis; zeros(4,2)];
+    zeros(2,7) -beta*eye(2)];
 
+Ba = [BkP19 ; 0 ; 0];
+Ca = [CkP19 0 0];
+Bva = [zeros(3,6); [Vnd zeros(4,2)]; [zeros(2,4) sqrt(2*beta)*diag([sigmai sigmav])]];
 
+[Fa,Ga]=c2d(Aa, Ba, Ts);
+[Fa, Gva] = c2d(Aa, Bva, Ts);
+lambdap20=eig(Fa);
 
+Mop20=[Ca
+    Ca*Fa
+    Ca*Fa^2
+    Ca*Fa^3
+    Ca*Fa^4
+    Ca*Fa^5
+    Ca*Fa^6
+    Ca*Fa^7
+    Ca*Fa^8];
+rank(Mop20); % = 8 but observable
 
+%% Pb 21
+Vnwdisc = Bva*[Vnd zeros(4,2); zeros(2,4) diag([sigmai sigmav])]*Bva'*Ts;
+sigman2d = sigman2/Ts;
+[M,P,Z,E] = dlqe(Fa,Gva,Ca,Vnwdisc,sigman2d);
