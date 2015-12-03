@@ -18,13 +18,13 @@ The state responses to $x_{ref}$ has been plotted figure \ref{fig:p17time} in th
 
 As we can see figure \ref{fig:p17time}, the reference is well tracked with a delay $\tau = 0.0016\ s$. Moreover, $u_e$ has also been plotted figure \ref{fig:p17time} and we can notice that $\max(u_e) \simeq 2 < 40\ V$, which respects the condition of the maximum voltage. The simulation has also been run with $Ax = 0.001\ m$ and $\max(u_e) \simeq 4 < 40\ V$ too ($\tau = 0.0011\ s$).
 
-Also, we can see figure \ref{fig:p17freq} that the harmonic distortion is attenuated. Indeed, we can see tab \ref{fig:tabTHD} that the percentage of the \textit{Total Harmonic Distortion (THD)} has decreased a lot, there is only 12\% of the initial THD left. Moreover, the distortion level of the second and third harmonic ($d_2$, $d_3$) have decreased a lot too (13 and 7\% left). Therefore, we can say that the controller succeeded in attenuating the harmonic distortion.
+Also, we can see figure \ref{fig:p17freq} that the harmonic distortion is attenuated. Indeed, we can see tab \ref{fig:tabTHD} that the percentage of the \textit{Total Harmonic Distortion (THD)} has decreased a lot, there is only 2 to 4\% of the initial THD left. Moreover, the distortion level of the second and third harmonic ($d_2$, $d_3$) have decreased a lot too (see figure \ref{fig:tabTHD}). Therefore, we can say that the controller succeeded in attenuating the harmonic distortion.
 
 \begin{figure}[H]
  \centering 
-\begin{tabular}{|l|c|r|}
+\begin{tabular}{|l|c|c|r|}
   \hline
-   & with controller Ax = 0.0005 m & with controller Ax = 0.001 m & without controller \\
+   & with controller (Ax = 0.0005 m) & with controller (Ax = 0.001 m) & without controller \\
   \hline
   THD & 0.0470 \% & 0.0966 \% & 2.4350 \%\\
 	\hline
