@@ -1,0 +1,9 @@
+In order to design a discrete time Kalman filter for the previous model, the first step is to discretize the covariance matrix $V_{nd}$. As the smallest constant time of the system is bigger than the $Ts$, we can discretize it as following.
+
+\begin{lstlisting}[language=Matlab]
+Vnwdisc = Bva*[Vnd zeros(4,2); zeros(2,4) diag([sigmai sigmav])]*Bva'*Ts;
+sigman2d = sigman2/Ts;
+[M,P,Z,E] = dlqe(Fa,Gva,Ca,Vnwdisc,sigman2d);
+\end{lstlisting}
+
+However, the \emph{dlqe} function of MATLAB does not accept our these matrices because $V_{nwdisc}$ must be square with as many columns as $G_{va}$.

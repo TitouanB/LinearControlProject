@@ -1,4 +1,4 @@
-\documentclass[11pt,a4paper,fleqn, onesside]{report}
+\documentclass[12pt,a4paper,fleqn, onesside]{report}
 %
 \usepackage[T1]{fontenc}
 \usepackage{amsmath, amssymb, amsthm}
@@ -22,6 +22,7 @@
 \usepackage{caption}
 \usepackage{multirow}
 \usepackage{spverbatim}
+\usepackage{mathptmx}
 \onehalfspacing
 
 \usepackage[top=25mm, left=30mm, right=30mm,bottom=25mm,headsep=10mm, footskip=12mm]{geometry}
@@ -117,7 +118,7 @@ We are now going to study the harmonic distortion observed in the states respons
 \input{Problem5}
 
 \subsection{Linearised Model}
-The measured output is set to the voice coil current. Therefore $y(t) = i(t)$.
+The measured output is set to the voice coil current. Therefore $y(t) = r(\text{x}) = i(t)$.
 We also take $u_{e} = 0$ for the analysis of the linear and nonlinear model around the resting position of the voice coil. 
 
 \subsection*{Problem 6}
@@ -151,6 +152,8 @@ y_{nl}(t)=A_1\sin(2\pi f_ct+\psi_1)+A_2\sin(4\pi f_ct+\psi_2)+A_3\sin(6\pi f_ct+
 \addcontentsline{toc}{subsubsection}{Problem 11}
 \input{Problem11}
 
+\section{Distortion Attenuation}
+
 \subsection{System discretization}
 \subsection*{Problem 12}
 \addcontentsline{toc}{subsubsection}{Problem 12}
@@ -182,7 +185,39 @@ y_{nl}(t)=A_1\sin(2\pi f_ct+\psi_1)+A_2\sin(4\pi f_ct+\psi_2)+A_3\sin(6\pi f_ct+
 \subsection{Output feedback voice coil position tracking control with disturbance rejection}
 \input{Problem19}
 
+\subsection*{Problem 20}
+\addcontentsline{toc}{subsubsection}{Problem 20}
+\input{Problem20}
+
+\subsection*{Problem 21}
+\addcontentsline{toc}{subsubsection}{Problem 21}
+\input{Problem21}
+
+\subsection*{Problem 22}
+\addcontentsline{toc}{subsubsection}{Problem 22}
+\input{Problem22}
+
 \appendix
+
+\chapter{SIMULINK Model of the Nonlinear System}
+\label{AppP2}
+\begin{figure}[H]
+ \centering 
+ \includegraphics[trim=2cm 2cm 2cm 2cm, clip=true, totalheight=0.47\textheight, angle=0]{figures/figP2.pdf}
+ \caption{SIMULINK Model of the Nonlinear System}
+\label{fig:figP2}
+\end{figure}
+
+\chapter{Block Diagram of the Linearised Loudspeaker}
+\label{AppLinearModelP7}
+\begin{figure}[H]
+ \centering 
+ \includegraphics[trim=5cm 3cm 2cm 3cm, clip=true, totalheight=0.5\textheight, angle=0]{figures/linearModel.pdf}
+ \caption{Block diagram of the linearised loudspeaker}
+\label{fig:linearModel}
+\end{figure}
+
+
 \chapter{SIMULINK Model of the Linear System}
 \label{AppLinearModelP9}
 \begin{figure}[H]
@@ -235,6 +270,26 @@ y_{nl}(t)=A_1\sin(2\pi f_ct+\psi_1)+A_2\sin(4\pi f_ct+\psi_2)+A_3\sin(6\pi f_ct+
  \includegraphics[trim=1cm 0cm 2cm 0cm, clip=true, totalheight=0.35\textheight, angle=0]{figures/modelp17.pdf}
  \caption{SIMULINK Model of the Nonlinear Model with the Discrete Time Feedback}
 \label{fig:modelp17}
+\end{figure}
+
+\chapter{SIMULINK Model of Kalman filter for the linear model with disturbance}
+\label{AppP22}
+\begin{figure}[H]
+ \centering 
+ \includegraphics[trim=1cm 0cm 2cm 0cm, clip=true, totalheight=0.35\textheight, angle=0]{figures/modelP22.pdf}
+ \caption{SIMULINK Model of the system with the Kalman filter}
+\end{figure}
+
+\begin{figure}[H]
+ \centering 
+ \includegraphics[trim=0cm 0cm 2cm 0cm, clip=true, totalheight=0.35\textheight, angle=0]{figures/modelP22_1.pdf}
+ \caption{SIMULINK Model of the linear model with process noise}
+\end{figure}
+
+\begin{figure}[H]
+ \centering 
+ \includegraphics[trim=1cm 0cm 2cm 0cm, clip=true, totalheight=0.35\textheight, angle=0]{figures/modelP22_2.pdf}
+ \caption{SIMULINK Model of Kalman filter}
 \end{figure}
 
 

@@ -21,7 +21,7 @@ t=0:STEP_SIZE:TIME_SIM;
 
 % P3
 Au = 5; % V
-fc = 20; % Hz
+fc = 200; % Hz
 ue = Au*sin(2*pi*fc*t);
 
 [tsp3,xsp3,ys] = sim('modelP3',TIME_SIM,[],[t' ue']);
@@ -31,18 +31,18 @@ tr = t(1/STEP_SIZE:length(t)); %tr = t; % tr = t(1/STEP_SIZE:length(t));
 
 %%
 figure
-grid on, axP = axes; set(axP, 'FontSize', 14)
-subplot(411), plot(t(1:2/STEP_SIZE),ue(1:2/STEP_SIZE))
+axP = axes; set(axP, 'FontSize', 14)
+grid on,subplot(411), plot(t(1:2/STEP_SIZE),ue(1:2/STEP_SIZE))
 title('input $u_e$ and states responses in time domain', 'FontSize', 14, 'Interpreter','Latex')
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$u_e$ [V]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(412), plot(t(1:2/STEP_SIZE),xsp3((1:2/STEP_SIZE),1))
+grid on,subplot(412), plot(t(1:2/STEP_SIZE),xsp3((1:2/STEP_SIZE),1))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$x$ [m]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(413), plot(t(1:2/STEP_SIZE),xsp3((1:2/STEP_SIZE),2))
+grid on,subplot(413), plot(t(1:2/STEP_SIZE),xsp3((1:2/STEP_SIZE),2))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$\dot{x}$ [m/s]', 'FontSize', 14, 'Interpreter','Latex')
-subplot(414), plot(t(1:2/STEP_SIZE),xsp3((1:2/STEP_SIZE),3))
+grid on,subplot(414), plot(t(1:2/STEP_SIZE),xsp3((1:2/STEP_SIZE),3))
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('$i$ [A]', 'FontSize', 14, 'Interpreter','Latex')
 
@@ -85,7 +85,7 @@ ylabel('$P_{i}$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
 Amplitudep4=[];
 for j=1:3
     for i=1:6
-       Amplitudep4(j,i)=amplituder(xsrp3(:,j), TIME_SIM, 20*i);
+       Amplitudep4(j,i)=amplituder(xsrp3(:,j), TIME_SIM, fc*i);
     end
 end
 
@@ -435,19 +435,20 @@ Pconti= [-4000, -1200-1000i, -1200+1000i];%[-2000, -1200-1000i, -1200+1000i]; %[
 % K=acker(F,G,Pdisc);
 % Fk=F-G*K;
 % sys_d=ss(F,G,C,[]);
-
+Pconti = Pconti*1.4;
 % discrete
 [z p kss] = ss2zp(F,G,C,0);
 %Pdisc = [p(1)*0.9 p(2)*0.9 p(3)*0.9];
-Pdisc = [0.6703 + 0.0000i, 0.8825 - 0.0885i, 0.8825 + 0.0885i];
+Pdisc = exp(Pconti*Ts)
+%Pdisc = [0.6703 + 0.0000i, 0.8825 - 0.0885i, 0.8825 + 0.0885i];
 K=acker(F,G,Pdisc);
 Fk=F-G*K;
 sys_kd=ss(Fk,G,C,0,Ts);
-%bode(sys_kd);
-tau1 = 1/Pconti(1)
-ome1 = sqrt(imag(Pconti(2))^2 + real(Pconti(2))^2)
-dzeta1 = -real(Pconti(2))/ome1
-ome1/(2*pi)
+bode(sys_kd);
+% tau1 = 1/Pconti(1)
+% ome1 = sqrt(imag(Pconti(2))^2 + real(Pconti(2))^2)
+% dzeta1 = -real(Pconti(2))/ome1
+% ome1/(2*pi)
 
 %%
 Ax=0.0008; %[m]
@@ -590,23 +591,23 @@ subplot(211), plot(fp1601(:,3),Pxxp1601_db(:,3)); hold on; plot(fp3(:,3),Pxxp3_d
 title('Periodogram Using FFT')
 l = legend('linear model', 'nonlinear model');
 set(l, 'Interpreter','Latex');
-axis([-1 100 -inf inf]);
+axis([fc-10 5*fc -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('PSD of $i$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
 subplot(212), plot(fp161(:,3),Pxxp161_db(:,3)); hold on; plot(fp3(:,3),Pxxp3_db(:,3));
 title('Periodogram Using FFT')
 l = legend('linear model', 'nonlinear model');
 set(l, 'Interpreter','Latex');
-axis([-1 100 -inf inf]);
+axis([fc-10 5*fc -inf inf]);
 xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('PSD of $i$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
 
-% figure;
-% grid on, axP = axes; set(axP, 'FontSize', 14)
-% plot(t(1:20000),ucontP16.Data(1:20000))
-% title('control input $u_e$', 'FontSize', 14, 'Interpreter','Latex')
-% xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
-% ylabel('$u_e$', 'FontSize', 14, 'Interpreter','Latex')
+figure;
+grid on, axP = axes; set(axP, 'FontSize', 14)
+plot(t(1:20000),ucontP16.Data(1:20000))
+title('control input $u_e$', 'FontSize', 14, 'Interpreter','Latex')
+xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
+ylabel('$u_e$', 'FontSize', 14, 'Interpreter','Latex')
 
 %% P17
 Ax=0.0005;
