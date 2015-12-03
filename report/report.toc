@@ -1,28 +1,45 @@
 \select@language {english}
 \select@language {english}
 \contentsline {chapter}{\numberline {1}Distortion Attenuation for Loudspeakers}{1}{chapter.1}
-\contentsline {section}{\numberline {1.1}Moving-coil Loudspeakers}{1}{section.1.1}
-\contentsline {subsection}{\numberline {1.1.1}Loudspeakers electrical equivalent circuit}{1}{subsection.1.1.1}
-\contentsline {subsubsection}{Problem 1}{2}{section*.3}
-\contentsline {subsubsection}{Problem 2}{2}{section*.4}
-\contentsline {subsubsection}{Problem 3}{2}{section*.5}
-\contentsline {subsection}{\numberline {1.1.2}Harmonic Distortion}{4}{subsection.1.1.2}
-\contentsline {subsubsection}{Problem 4}{4}{section*.8}
-\contentsline {subsubsection}{Problem 5}{5}{section*.9}
-\contentsline {subsection}{\numberline {1.1.3}Linearised Model}{6}{subsection.1.1.3}
-\contentsline {subsubsection}{Problem 6}{6}{section*.11}
-\contentsline {subsubsection}{Problem 7}{8}{section*.12}
+\contentsline {section}{Introduction}{1}{section*.2}
+\contentsline {section}{\numberline {1.1}Moving-coil Loudspeakers}{2}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}Loudspeakers electrical equivalent circuit}{2}{subsection.1.1.1}
+\contentsline {subsubsection}{Problem 1}{2}{section*.4}
+\contentsline {subsubsection}{Problem 2}{3}{section*.5}
+\contentsline {subsubsection}{Problem 3}{3}{section*.6}
+\contentsline {subsection}{\numberline {1.1.2}Harmonic Distortion}{5}{subsection.1.1.2}
+\contentsline {subsubsection}{Problem 4}{5}{section*.9}
+\contentsline {subsubsection}{Problem 5}{6}{section*.10}
+\contentsline {subsection}{\numberline {1.1.3}Linearised Model}{7}{subsection.1.1.3}
+\contentsline {subsubsection}{Problem 6}{7}{section*.12}
+\contentsline {subsubsection}{Problem 7}{9}{section*.13}
 \contentsline {subsubsection}{Problem 8}{9}{section*.14}
 \contentsline {subsubsection}{Problem 9}{10}{section*.15}
-\contentsline {subsection}{\numberline {1.1.4}Harmonic distortion and fictitious disturbances}{11}{subsection.1.1.4}
+\contentsline {subsection}{\numberline {1.1.4}Harmonic distortion and fictitious disturbances}{12}{subsection.1.1.4}
 \contentsline {subsubsection}{Problem 10}{12}{section*.18}
 \contentsline {subsubsection}{Problem 11}{12}{section*.19}
-\contentsline {subsection}{\numberline {1.1.5}System discretization}{14}{subsection.1.1.5}
+\contentsline {section}{\numberline {1.2}Distortion Attenuation}{14}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}System discretization}{14}{subsection.1.2.1}
 \contentsline {subsubsection}{Problem 12}{14}{section*.22}
 \contentsline {subsubsection}{Problem 13}{14}{section*.23}
-\contentsline {subsubsection}{Problem 16}{14}{section*.24}
-\contentsline {subsubsection}{Problem 17}{16}{section*.27}
-\contentsline {chapter}{\numberline {A}SIMULINK Model of the Linear System}{18}{appendix.A}
-\contentsline {chapter}{\numberline {B}SIMULINK Model of the Linear System with Disturbance}{19}{appendix.B}
-\contentsline {chapter}{\numberline {C}SIMULINK Model of the Continuous Time Linear System with the Discrete Time Feedback}{20}{appendix.C}
-\contentsline {chapter}{\numberline {D}SIMULINK Model of the Nonlinear Model with the Discrete Time Feedback}{21}{appendix.D}
+\contentsline {subsection}{\numberline {1.2.2}Voice coil position reference tracking}{15}{subsection.1.2.2}
+\contentsline {subsubsection}{Problem 14}{16}{section*.26}
+\contentsline {subsubsection}{Problem 15}{16}{section*.27}
+\contentsline {subsubsection}{Problem 16}{17}{section*.30}
+\contentsline {subsubsection}{Problem 17}{19}{section*.34}
+\contentsline {subsubsection}{Problem 18}{21}{section*.38}
+\contentsline {subsection}{\numberline {1.2.3}Output feedback voice coil position tracking control with disturbance rejection}{22}{subsection.1.2.3}
+\contentsline {subsubsection}{Problem 19}{22}{section*.40}
+\contentsline {subsubsection}{Problem 20}{23}{section*.41}
+\contentsline {subsubsection}{Problem 21}{24}{section*.42}
+\contentsline {subsubsection}{Problem 22}{24}{section*.43}
+\contentsline {section}{Conclusion}{25}{section*.44}
+\contentsline {chapter}{\numberline {A}SIMULINK Model of the Nonlinear System}{26}{appendix.A}
+\contentsline {chapter}{\numberline {B}Block Diagram of the Linearised Loudspeaker}{27}{appendix.B}
+\contentsline {chapter}{\numberline {C}SIMULINK Model of the Linear System}{28}{appendix.C}
+\contentsline {chapter}{\numberline {D}SIMULINK Model of the Linear System with Disturbance in Continuous Time}{29}{appendix.D}
+\contentsline {chapter}{\numberline {E}SIMULINK Model of the Linear System with Disturbance in Discrete Time}{30}{appendix.E}
+\contentsline {chapter}{\numberline {F}SIMULINK Model of the Discrete Time Linear System with the Feedback Controller}{31}{appendix.F}
+\contentsline {chapter}{\numberline {G}SIMULINK Model of the Continuous Time Linear System with the Discrete Time Feedback}{32}{appendix.G}
+\contentsline {chapter}{\numberline {H}SIMULINK Model of the Nonlinear Model with the Discrete Time Feedback}{33}{appendix.H}
+\contentsline {chapter}{\numberline {I}SIMULINK Model of Kalman filter for the linear model with disturbance}{34}{appendix.I}

@@ -800,7 +800,8 @@ CkP19 = [C_p19 0 0 0 0];
 Akbis = [0 0;
         0 AkP19(2,2);
         AkP19(3,3) 0];
-sigmaVnd = [0.02 0.03 0.04 0.05];
+%sigmaVnd = [0.0002 0.0003 0.0004 0.0005];
+sigmaVnd = [0 0 0 0];
 Vnd = diag(sigmaVnd);
 Bkn = [Akbis zeros(3,4); 
     zeros(4,2) eye(4)];
@@ -853,9 +854,9 @@ Mop20=[Ca
 rank(Mop20); % = 8 but observable
 
 %% Pb 21
-Vnwdisc = Bva(4:end,:)*[Vnd zeros(4,2); zeros(2,4) diag([sigmai sigmav])]*Bva(4:end,:)'*Ts;
+Q = Bva(4:end,:)*[Vnd zeros(4,2); zeros(2,4) diag([sigmai sigmav])]*Bva(4:end,:)'*Ts;
 sigman2d = sigman2/Ts;
-[M,P,Z,E] = dlqe(Fa,Gva,Ca,Vnwdisc,sigman2d);
+[M,P,Z,E] = dlqe(Fa,Gva,Ca,Q,sigman2d);
 
 %% Pb 22
 C = [0 0 1];
@@ -863,7 +864,7 @@ C = [0 0 1];
 
 figure
 grid on, axP = axes; set(axP, 'FontSize', 14)
-subplot(411), plot(t(1:20000),xoutP22.Data(1:20000,1)); hold on; plot(t(1:20000),xhatoutP22.Data(1:20000),'--');
+subplot(411), plot(t(1:20000),xoutP22.Data(1:20000,1)); hold on; plot(k(1:20000)*Ts,xhatoutP22.Data(1:20000),'--');
 l = legend('state $x$', '$x_{hat}$');
 set(l, 'Interpreter','Latex');
 xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
