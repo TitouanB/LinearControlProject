@@ -1,21 +1,21 @@
-In order to include the proper noise models, we augment the system of Problem 19 with $n_x$. Thus, our new state vector is $\text{x}_a = (i, \text{x}, \dot{\text{x}}, \text{x}_{d1}, \text{x}_{d2}, \text{x}_{d3}, \text{x}_{d4}, n_i, n_v)^T$. As $n_x$ is a band-limited noise characterized by $R(\tau)=\sigma^2e^{-\beta|\tau|}$, we have $\dot{n_x}=A_{nx}n_x+B_{nx}w$ with
+In order to include the proper noise models, we augment the system of Problem 19 with $n_x$. Thus, our new state vector is $\text{x}_a = (i, \text{x}, \dot{\text{x}}, \text{x}_{d1}, \text{x}_{d2}, \text{x}_{d3}, \text{x}_{d4}, n_i, n_v)^T$. As $n_x$ is a band-limited noise characterized by $R(\tau)=\sigma^2e^{-\beta|\tau|}$, we apply the same principle than in Group Work 15 and we have $\dot{n_x}=A_{nx}n_x+B_{nx}\omega$ where $\omega$ is a white noise with
 
 \begin{equation*}
   A_{nx} = \begin{pmatrix}
    -\beta & 0 \\
 	0 & -\beta
 \end{pmatrix}
-\qquad B_{bn} = \begin{pmatrix}
-	\sqrt{2\beta}\sigma_{nx1} & 0 \\
-	0 & \sqrt{2\beta}\sigma_{nx2} 
+\qquad B_{nx} = \begin{pmatrix}
+	\sqrt{2\beta}\sigma_{n_i} & 0 \\
+	0 & \sqrt{2\beta}\sigma_{n_v} 
 \end{pmatrix}
-\qquad w = \begin{pmatrix}
-	w_1 \\
-	w2
+\qquad \omega = \begin{pmatrix}
+	\omega_1 \\
+	\omega_2
 	\end{pmatrix}
 \end{equation*}
 
-Thus, our new process noise $v$ is $(n_{d1}, n_{d2}, n_{d3}, n_{d4}, w_1, w_2)^T$ and the system is :
+Thus, our new process noise $v$ is $(n_{d1}, n_{d2}, n_{d3}, n_{d4}, \omega_1, \omega_2)^T$ and the system is :
 
 \begin{align*}
 \dot{\text{x}}_a &= A_a \text{x}_a + B_a u_e + B_{av} v \\
@@ -35,7 +35,7 @@ y &= C_a \text{x}_a + n_2 \qquad \qquad \qquad \text{with }C_{a} = \begin{pmatri
 \end{pmatrix}
 \qquad B_{av} = \begin{pmatrix}
 	0_{3\times 6} \\
-	V_{nd} & 0_{1\times 2} \\
+	Id_{4} & 0_{1\times 2} \\
 	0_{2\times 1} & B_{nx}
 	\end{pmatrix}
 	\qquad B_{kn bis} = \begin{pmatrix}
@@ -43,3 +43,5 @@ y &= C_a \text{x}_a + n_2 \qquad \qquad \qquad \text{with }C_{a} = \begin{pmatri
 	0_{2\times 2}
 	\end{pmatrix}
 \end{equation*}
+
+The system was discretised in the same way than in P12. We assess again the observability of the system by computing the observability matrix (7 $\times$ 7). Its rank is equal to 5 like in P19. The discretisation has preserved it.
