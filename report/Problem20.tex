@@ -1,0 +1,45 @@
+In order to include the proper noise models, we augment the system of Problem 19 with $n_x$. Thus, our new state vector is $\text{x}_a = (i, \text{x}, \dot{\text{x}}, \text{x}_{d1}, \text{x}_{d2}, \text{x}_{d3}, \text{x}_{d4}, n_i, n_v)^T$. As $n_x$ is a band-limited noise characterized by $R(\tau)=\sigma^2e^{-\beta|\tau|}$, we have $\dot{n_x}=A_{nx}n_x+B_{nx}w$ with
+
+\begin{equation*}
+  A_{nx} = \begin{pmatrix}
+   -\beta & 0 \\
+	0 & -\beta
+\end{pmatrix}
+\qquad B_{bn} = \begin{pmatrix}
+	\sqrt{2\beta}\sigma_{nx1} & 0 \\
+	0 & \sqrt{2\beta}\sigma_{nx2} 
+\end{pmatrix}
+\qquad w = \begin{pmatrix}
+	w_1 \\
+	w2
+	\end{pmatrix}
+\end{equation*}
+
+Thus, our new process noise $v$ is $(n_{d1}, n_{d2}, n_{d3}, n_{d4}, w_1, w_2)^T$ and the system is :
+
+\begin{align*}
+\dot{\text{x}}_a &= A_a \text{x}_a + B_a u_e + B_{av} v \\
+y &= C_a \text{x}_a + n_2 \qquad \qquad \qquad \text{with }C_{a} = \begin{pmatrix}
+	C_{kn} & 0_{1\times 2}
+	\end{pmatrix}
+\end{align*}
+
+\begin{equation*}
+  A_{a} = \begin{pmatrix}
+   A_k & B_{kn bis} \\
+	0_{2\times 1} & A_{nx}
+\end{pmatrix}
+\qquad B_{a} = \begin{pmatrix}
+	B_k \\
+	0_{4\times 1}
+\end{pmatrix}
+\qquad B_{av} = \begin{pmatrix}
+	0_{3\times 6} \\
+	V_{nd} & 0_{1\times 2} \\
+	0_{2\times 1} & B_{nx}
+	\end{pmatrix}
+	\qquad B_{kn bis} = \begin{pmatrix}
+	A_{bis}\\
+	0_{2\times 2}
+	\end{pmatrix}
+\end{equation*}
