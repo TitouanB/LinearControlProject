@@ -16,7 +16,7 @@ The state responses to $x_{ref}$ has been plotted figure \ref{fig:p17time} in th
  \label{fig:p17freq}
 \end{figure}
 
-As we can see figure \ref{fig:p17time}, the reference is well tracked with a delay $\tau = 0.0034\ s$. Moreover, $u_e$ has also been plotted figure \ref{fig:p17time} and we can notice that $\max(u_e) \simeq 2 < 5\ V$, which respects the condition of the maximum voltage. The simulation has also been run with $Ax = 0.001\ m$ and $\max(u_e) \simeq 3.7 < 5\ V$ too.
+As we can see figure \ref{fig:p17time}, the reference is well tracked with a delay $\tau = 0.0016\ s$. Moreover, $u_e$ has also been plotted figure \ref{fig:p17time} and we can notice that $\max(u_e) \simeq 2 < 40\ V$, which respects the condition of the maximum voltage. The simulation has also been run with $Ax = 0.001\ m$ and $\max(u_e) \simeq 4 < 40\ V$ too ($\tau = 0.0011\ s$).
 
 Also, we can see figure \ref{fig:p17freq} that the harmonic distortion is attenuated. Indeed, we can see tab \ref{fig:tabTHD} that the percentage of the \textit{Total Harmonic Distortion (THD)} has decreased a lot, there is only 12\% of the initial THD left. Moreover, the distortion level of the second and third harmonic ($d_2$, $d_3$) have decreased a lot too (13 and 7\% left). Therefore, we can say that the controller succeeded in attenuating the harmonic distortion.
 
@@ -24,13 +24,13 @@ Also, we can see figure \ref{fig:p17freq} that the harmonic distortion is attenu
  \centering 
 \begin{tabular}{|l|c|r|}
   \hline
-   & with controller & without controller \\
+   & with controller Ax = 0.0005 m & with controller Ax = 0.001 m & without controller \\
   \hline
-  THD & 0.3029 \% & 2.4350 \%\\
+  THD & 0.0470 \% & 0.0966 \% & 2.4350 \%\\
 	\hline
-  d2 & 0.3005 \%& 2.3735 \%\\
+  d2 & 0.0467 \%& 0.0930 \% & 2.3735 \%\\
 	\hline
-	d3 & 0.0383 \%& 0.5432 \%\\
+	d3 & 0.0056 \%& 0.0261 \% & 0.5432 \%\\
   \hline
 \end{tabular}
 \caption{THD, d2 an d3 of the coil velocity with the nonlinear model with and without controller (include the first 5 harmonics after the fundamental frequency fc = 20 $Hz$)}

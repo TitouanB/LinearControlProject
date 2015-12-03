@@ -21,7 +21,7 @@ t=0:STEP_SIZE:TIME_SIM;
 
 % P3
 Au = 5; % V
-fc = 200; % Hz
+fc = 20; % Hz
 ue = Au*sin(2*pi*fc*t);
 
 [tsp3,xsp3,ys] = sim('modelP3',TIME_SIM,[],[t' ue']);
@@ -445,10 +445,10 @@ K=acker(F,G,Pdisc);
 Fk=F-G*K;
 sys_kd=ss(Fk,G,C,0,Ts);
 bode(sys_kd);
-% tau1 = 1/Pconti(1)
-% ome1 = sqrt(imag(Pconti(2))^2 + real(Pconti(2))^2)
-% dzeta1 = -real(Pconti(2))/ome1
-% ome1/(2*pi)
+tau1 = 1/Pconti(1)
+ome1 = sqrt(imag(Pconti(2))^2 + real(Pconti(2))^2)
+dzeta1 = -real(Pconti(2))/ome1
+ome1/(2*pi)
 
 %%
 Ax=0.0008; %[m]
@@ -603,14 +603,14 @@ xlabel('frequency [Hz]', 'FontSize', 14, 'Interpreter','Latex')
 ylabel('PSD of $i$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
 
 figure;
-grid on, axP = axes; set(axP, 'FontSize', 14)
+grid on
 plot(t(1:20000),ucontP16.Data(1:20000))
-title('control input $u_e$', 'FontSize', 14, 'Interpreter','Latex')
-xlabel('Time [s]', 'FontSize', 14, 'Interpreter','Latex')
-ylabel('$u_e$', 'FontSize', 14, 'Interpreter','Latex')
+title('control input $u_e$', 'Interpreter','Latex')
+xlabel('Time [s]', 'Interpreter','Latex')
+ylabel('$u_e$', 'Interpreter','Latex')
 
 %% P17
-Ax=0.0005;
+Ax=0.001;
 xref_c = Ax*sin(2*pi*fc*t);
 
 [ts,xsp17,ys] = sim('modelP17',TIME_SIM,[],[t' xref_c']);
@@ -678,7 +678,7 @@ ylabel('$P_i$ [dB/Hz]', 'FontSize', 14, 'Interpreter','Latex')
 Amplitudep17=[];
 for j=1:3
     for i=1:6
-       Amplitudep17(j,i)=amplituder(xsrp17(:,j), TIME_SIM, 20*i);
+       Amplitudep17(j,i)=amplituder(xsrp17(:,j), TIME_SIM, fc*i);
     end
 end
 
